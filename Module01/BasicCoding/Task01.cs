@@ -32,9 +32,28 @@ namespace BasicCoding
                 throw new ArgumentException("i must not be greater than j");
             }
 
-            return 0;
+            var mask = GetMask(i, j);
+            var inversedMask = ~mask;
+
+            return (a & inversedMask) | (b & mask);
         }
 
         private static bool IsInRangeIndex(int i) => i >= 0 && i <= 32;
+
+        // returns mask like 00000000 00000111 11110000 00000000.
+        private static int GetMask(int lastBit, int firstBit)
+        {
+            int mask = 0;
+            int size = firstBit - lastBit + 1;
+
+            for (int i = 0; i < size; i++)
+            {
+                mask *= 2;
+                mask += 1;
+            }
+
+            mask <<= lastBit;
+            return mask;
+        }
     }
 }
