@@ -17,8 +17,8 @@ namespace BasicCoding
         /// </summary>
         /// <param name="a">The first integer.</param>
         /// <param name="b">The second integer.</param>
-        /// <param name="i">The first bit.</param>
-        /// <param name="j">The last bit.</param>
+        /// <param name="i">The last bit.</param>
+        /// <param name="j">The first bit.</param>
         /// <returns>The modified number.</returns>
         public static int InsertNumber(int a, int b, int i, int j)
         {
@@ -35,7 +35,7 @@ namespace BasicCoding
             var mask = GetMask(i, j);
             var inversedMask = ~mask;
 
-            return (a & inversedMask) | (b & mask);
+            return (a & inversedMask) | (b << i & mask);
         }
 
         private static bool IsInRangeIndex(int i) => i >= 0 && i <= 32;

@@ -19,6 +19,9 @@ namespace BasicCoding.Tests
         /// <returns>Modified first number.</returns>
         [TestCase(64, 63, 0, 1, ExpectedResult = 67)]
         [TestCase(255, 0, 3, 5, ExpectedResult = 199)]
+        [TestCase(15, 15, 0, 0, ExpectedResult = 15)]
+        [TestCase(8, 15, 0, 0, ExpectedResult = 9)]
+        [TestCase(8, 15, 3, 8, ExpectedResult = 120)]
         public int CheckInsertNumber(int a, int b, int i, int j)
         {
             return Task01.InsertNumber(a, b, i, j);
