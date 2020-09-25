@@ -20,6 +20,21 @@ namespace BasicCoding
         /// <param name="i">The first bit.</param>
         /// <param name="j">The last bit.</param>
         /// <returns>The modified number.</returns>
-        public static int InsertNumber(int a, int b, int i, int j) => throw new NotImplementedException();
+        public static int InsertNumber(int a, int b, int i, int j)
+        {
+            if (!IsInRangeIndex(i) || !IsInRangeIndex(j))
+            {
+                throw new ArgumentOutOfRangeException("Indexes i and j must be in range 0..32");
+            }
+
+            if (i > j)
+            {
+                throw new ArgumentException("i must not be greater than j");
+            }
+
+            return 0;
+        }
+
+        private static bool IsInRangeIndex(int i) => i >= 0 && i <= 32;
     }
 }
