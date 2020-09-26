@@ -4,6 +4,8 @@
 
 namespace BasicCoding
 {
+    using System;
+
     /// <summary>
     /// Task 3.
     /// Implement the search algorithm in a real array for an element index for which the sum of the elements on the left
@@ -11,6 +13,8 @@ namespace BasicCoding
     /// </summary>
     public static class Task03
     {
+        private const double Epsilon = 1E-10;
+
         /// <summary>
         /// Finds an element for which the sum of the elements on the left
         /// and the sum of the elements on the right are equal.
@@ -30,7 +34,7 @@ namespace BasicCoding
             {
                 sumLeft += a[i];
                 double sumRight = sumTotal - sumLeft + a[i];
-                if (sumLeft == sumRight)
+                if (AreEqual(sumLeft, sumRight))
                 {
                     return i;
                 }
@@ -38,5 +42,7 @@ namespace BasicCoding
 
             return -1;
         }
+
+        private static bool AreEqual(double a, double b) => Math.Abs(a - b) < Epsilon;
     }
 }

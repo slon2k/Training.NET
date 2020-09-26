@@ -20,6 +20,8 @@ namespace BasicCoding.Tests
         [TestCase(new int[] { 1, 2, 4, 6, 4, 0 }, ExpectedResult = 6)]
         [TestCase(new int[] { 3, 2, 1 }, ExpectedResult = 3)]
         [TestCase(new int[] { -3, -2, -1 }, ExpectedResult = -1)]
+        [TestCase(new int[] { 1, 1, 1, 1, 1, 1, 1 }, ExpectedResult = 1)]
+        [TestCase(new int[] { 0, -1, 11, 21, 1, 2, 8, 65, 34, 21, 765, -12, 566, 7878, -199, 0, 34, 65, 87, 12, 34 }, ExpectedResult = 7878)]
         public int CheckFindMax(int[] a)
         {
             return Task02.FindMax(a);
