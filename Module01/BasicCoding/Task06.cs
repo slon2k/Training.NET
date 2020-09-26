@@ -27,7 +27,33 @@ namespace BasicCoding
                 throw new ArgumentOutOfRangeException("digit is not in range");
             }
 
-            return a;
+            var filteredList = new List<int>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i].HasDigit(digit))
+                {
+                    filteredList.Add(a[i]);
+                }
+            }
+
+            return filteredList.ToArray();
+        }
+
+        private static bool HasDigit(this int number, int digit)
+        {
+            number = Math.Abs(number);
+            while (number > 0)
+            {
+                int lastDigit = number % 10;
+                if (lastDigit == digit)
+                {
+                    return true;
+                }
+
+                number /= 10;
+            }
+
+            return false;
         }
 
         private static bool IsDigit(int digit) => digit >= 0 && digit <= 9;
