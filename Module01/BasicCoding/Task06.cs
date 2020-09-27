@@ -41,6 +41,11 @@ namespace BasicCoding
 
         private static bool HasDigit(this int number, int digit)
         {
+            if (!IsDigit(digit))
+            {
+                throw new ArgumentOutOfRangeException("digit is not in range");
+            }
+
             number = Math.Abs(number);
             while (number > 0)
             {
