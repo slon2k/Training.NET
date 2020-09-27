@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCoding", "BasicCoding\BasicCoding.csproj", "{30B81611-9CFC-4583-8D39-7707824CE291}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9059FABA-1B66-4015-BAA2-A8DB709CE167}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCoding.Tests", "BasicCoding.Tests\BasicCoding.Tests.csproj", "{C641AC3A-92F9-44BA-B042-E8FE7B663575}"
 EndProject
