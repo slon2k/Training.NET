@@ -90,33 +90,42 @@ namespace BasicCoding
 
             // Looking for greater successor of the first decreasing element.
             int j = length - 1;
-            while (digits[j] <= digits[i - 1])
+            while (digits[j] <= digits[lastIncreasing - 1])
             {
                 j--;
             }
 
-            int successor = j;
+            int greaterSuccessor = j;
 
             // Swapping the first decreasing element and it's greater successor.
-            int temp = digits[lastIncreasing - 1];
-            digits[lastIncreasing - 1] = digits[successor];
-            digits[successor] = temp;
+            digits.Swap(lastIncreasing - 1, greaterSuccessor);
 
-            // Reversing the suffix starting at position of the last increasing element of the original permutation.
+            // Reversing the suffix starting at the position of the last increasing element of the original permutation.
             // Since the suffix was in increasing order we can reverse it to get the lowest possible value.
             j = length - 1;
             i = lastIncreasing;
 
             while (i < j)
             {
-                temp = digits[i];
-                digits[i] = digits[j];
-                digits[j] = temp;
-                i++;
-                j--;
+                digits.Swap(i++, j--);
             }
 
             return digits;
         }
+
+        private static void Swap(this List<int> list, int i, int j)
+        {
+            int length = list.Count;
+            if (!i.IsInRange(0, length - 1) || !j.IsInRange(0, length - 1))
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+
+        private static bool IsInRange(this int number, int minValue, int maxValue) => number >= minValue && number <= maxValue;
     }
 }
