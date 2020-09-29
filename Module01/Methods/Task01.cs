@@ -26,6 +26,7 @@ namespace Methods
         private const string NegativeZero = "1000000000000000000000000000000000000000000000000000000000000000";
         private const int BaseExponent = 1023;
         private const int BitsExponent = 11;
+        private const int BitsMantissa = 52;
 
         /// <summary>
         /// String representation of a number in the IEEE 754 format.
@@ -52,8 +53,41 @@ namespace Methods
             char sign = number >= 0 ? '0' : '1';
             number = Math.Abs(number);
             string exponent = number >= 1 ? ExpPlus(number) : ExpMinus(number);
+            string mantissa = Mantissa(number);
+            return $"{sign}{exponent}{mantissa}";
+        }
 
-            return $"{sign}{exponent}";
+        private static string Mantissa(double number)
+        {
+            if (number >= 1)
+            {
+                while (number >= 2)
+                {
+                    number /= 2;
+                }
+            }
+
+            if (number < 1)
+            {
+                while (number < 1)
+                {
+                    number *= 2;
+                }
+            }
+
+            number -= 1;
+
+            var digits = new List<string>();
+
+            while (digits.Count < BitsMantissa)
+            {
+                number *= 2;
+                int digit = (int)number;
+                digits.Add($"{digit}");
+                number -= digit;
+            }
+
+            return string.Join(string.Empty, digits);
         }
 
         private static string ExpPlus(double number)
@@ -63,7 +97,7 @@ namespace Methods
                 throw new ArgumentOutOfRangeException("Number is out of range.");
             }
 
-            int integerPart = (int)number;
+            long integerPart = (long)number;
             int exp = -1;
 
             while (integerPart >= 1)
@@ -79,15 +113,10 @@ namespace Methods
         {
             var digits = new List<string>();
 
-            while (number > 0)
+            while (digits.Count < bits)
             {
                 digits.Add($"{number % 2}");
                 number /= 2;
-            }
-
-            while (digits.Count < bits)
-            {
-                digits.Add("0");
             }
 
             digits.Reverse();
