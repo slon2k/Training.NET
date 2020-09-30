@@ -24,4 +24,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BasicCoding\BasicCoding.csproj" />
+    <ProjectReference Include="..\CreatingTypes\CreatingTypes.csproj" />
+    <ProjectReference Include="..\Methods\Methods.csproj" />
+  </ItemGroup>
+
 </Project>

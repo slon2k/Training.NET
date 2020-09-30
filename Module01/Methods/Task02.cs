@@ -5,6 +5,7 @@
 namespace Methods
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Task 2.
@@ -18,7 +19,7 @@ namespace Methods
         /// </summary>
         /// <param name="numbers">Set of integers.</param>
         /// <returns>GCD.</returns>
-        public static int EuclideanAlgorithm(params int[] numbers)
+        public static long EuclideanAlgorithm(params long[] numbers)
         {
             if (numbers.Length < 2)
             {
@@ -30,7 +31,12 @@ namespace Methods
                 return GcdEuclid(numbers[0], EuclideanAlgorithm(numbers[1..]));
             }
 
-            return GcdEuclid(numbers[0], numbers[1]);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            long result = GcdEuclid(numbers[0], numbers[1]);
+            stopwatch.Stop();
+            Console.WriteLine($"Euclid's algorithm for {numbers[0]} and {numbers[1]}. Elapsed ticks: {stopwatch.ElapsedTicks}");
+            return result;
         }
 
         /// <summary>
@@ -38,7 +44,7 @@ namespace Methods
         /// </summary>
         /// <param name="numbers">Set of integers.</param>
         /// <returns>GCD.</returns>
-        public static int SteinAlgorithm(params int[] numbers)
+        public static long SteinAlgorithm(params long[] numbers)
         {
             if (numbers.Length < 2)
             {
@@ -50,10 +56,15 @@ namespace Methods
                 return GcdStein(numbers[0], SteinAlgorithm(numbers[1..]));
             }
 
-            return GcdStein(numbers[0], numbers[1]);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            long result = GcdStein(numbers[0], numbers[1]);
+            stopwatch.Stop();
+            Console.WriteLine($"Stein's algorithm for {numbers[0]} and {numbers[1]}. Elapsed ticks: {stopwatch.ElapsedTicks}");
+            return result;
         }
 
-        private static int GcdEuclid(int a, int b)
+        private static long GcdEuclid(long a, long b)
         {
             if (a == 0 && b == 0)
             {
@@ -66,7 +77,7 @@ namespace Methods
             while (b > 0)
             {
                 a %= b;
-                int temp = a;
+                long temp = a;
                 a = b;
                 b = temp;
             }
@@ -74,7 +85,7 @@ namespace Methods
             return a;
         }
 
-        private static int GcdStein(int a, int b)
+        private static long GcdStein(long a, long b)
         {
             if (a == 0 && b == 0)
             {

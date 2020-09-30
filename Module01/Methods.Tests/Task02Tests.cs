@@ -18,9 +18,9 @@ namespace Methods.Tests
         /// </summary>
         /// <param name="args">Set of integers.</param>
         /// <returns>GCD.</returns>
-        [TestCase(new int[] { 15, 20, 25 }, ExpectedResult = 5)]
-        [TestCase(new int[] { 0, 20, 100 }, ExpectedResult = 20)]
-        public int CheckEuclideanAlgorithm(int[] args)
+        [TestCase(new long[] { 15, 20, 25 }, ExpectedResult = 5)]
+        [TestCase(new long[] { 0, 20, 100 }, ExpectedResult = 20)]
+        public long CheckEuclideanAlgorithm(long[] args)
         {
             return EuclideanAlgorithm(args);
         }
@@ -30,9 +30,9 @@ namespace Methods.Tests
         /// </summary>
         /// <param name="args">Set of integers.</param>
         /// <returns>GCD.</returns>
-        [TestCase(new int[] { 15, 20, 25 }, ExpectedResult = 5)]
-        [TestCase(new int[] { 0, 20, 100 }, ExpectedResult = 20)]
-        public int CheckSteinAlgorithm(int[] args)
+        [TestCase(new long[] { 15, 20, 25 }, ExpectedResult = 5)]
+        [TestCase(new long[] { 0, 20, 100 }, ExpectedResult = 20)]
+        public long CheckSteinAlgorithm(long[] args)
         {
             return SteinAlgorithm(args);
         }
