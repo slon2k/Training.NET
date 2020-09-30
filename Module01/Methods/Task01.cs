@@ -6,9 +6,6 @@ namespace Methods
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection.Metadata.Ecma335;
-    using System.Security.Principal;
-    using System.Text;
 
     /// <summary>
     /// Task 1.
@@ -59,21 +56,7 @@ namespace Methods
 
         private static string Mantissa(double number)
         {
-            if (number >= 1)
-            {
-                while (number >= 2)
-                {
-                    number /= 2;
-                }
-            }
-
-            if (number < 1)
-            {
-                while (number < 1)
-                {
-                    number *= 2;
-                }
-            }
+            number = Normalize(number);
 
             number -= 1;
 
@@ -88,6 +71,21 @@ namespace Methods
             }
 
             return string.Join(string.Empty, digits);
+        }
+
+        private static double Normalize(double number)
+        {
+            while (number >= 2)
+            {
+                number /= 2;
+            }
+
+            while (number < 1)
+            {
+                number *= 2;
+            }
+
+            return number;
         }
 
         private static string ExpPlus(double number)
