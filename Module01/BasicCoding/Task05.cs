@@ -6,6 +6,7 @@ namespace BasicCoding
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Task 5.
@@ -27,7 +28,11 @@ namespace BasicCoding
 
             try
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 var nextPermutation = NextPermutation(GetDigits(number));
+                stopwatch.Stop();
+                Console.WriteLine($"Next number found for {number}. Elapsed ticks: {stopwatch.ElapsedTicks}. Elapsed time: {stopwatch.Elapsed}");
                 return DigitsToNumber(nextPermutation);
             }
             catch (Exception)

@@ -22,6 +22,8 @@ namespace BasicCoding.Tests
         [TestCase(15, 15, 0, 0, ExpectedResult = 15)]
         [TestCase(8, 15, 0, 0, ExpectedResult = 9)]
         [TestCase(8, 15, 3, 8, ExpectedResult = 120)]
+        [TestCase(int.MaxValue, 0, 0, 0, ExpectedResult = int.MaxValue - 1)]
+        [TestCase(int.MaxValue, 0, 0, 2, ExpectedResult = int.MaxValue - 7)]
         public int CheckInsertNumber(int a, int b, int i, int j)
         {
             return Task01.InsertNumber(a, b, i, j);

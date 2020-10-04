@@ -13,7 +13,9 @@ namespace App
     {
         private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            BasicCoding.Task05.FindNextBiggerNumber(1231881231);
+            Methods.Task02.EuclideanAlgorithm((1L << 25) - (1L << 7) - 500, 1L << 50);
+            Methods.Task02.SteinAlgorithm((1L << 25) - (1L << 7) - 500, 1L << 50);
         }
     }
 }
