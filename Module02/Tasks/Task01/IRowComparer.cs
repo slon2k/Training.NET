@@ -12,7 +12,7 @@ namespace Tasks
         /// <summary>
         /// Compares rows of integer array.
         /// </summary>
-        /// <param name="array">Sourse array</param>
+        /// <param name="array">Sourse array.</param>
         /// <param name="first">Index of the first row.</param>
         /// <param name="second">Index of the second row.</param>
         /// <returns>True if the second row is greater.</returns>

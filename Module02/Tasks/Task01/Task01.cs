@@ -19,7 +19,8 @@ namespace Tasks
         /// </summary>
         /// <param name="array">Sourse array.</param>
         /// <param name="comparer">Row comparer.</param>
-        public static void SortRows(int[,] array, IRowComparer comparer)
+        /// <param name="ascending">Sorting order. Ascending by default.</param>
+        public static void SortRows(int[,] array, IRowComparer comparer, bool ascending = true)
         {
             int length = array.GetLength(0);
             if (length == 0)
@@ -36,7 +37,7 @@ namespace Tasks
             {
                 for (int j = 0; j < length - i - 1; j++)
                 {
-                    if (comparer.CompareRows(array, j, j + 1) == true)
+                    if (comparer.CompareRows(array, j, j + 1) == ascending)
                     {
                         array.SwapRows(j, j + 1);
                     }
