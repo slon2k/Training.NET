@@ -52,6 +52,5 @@ namespace Tasks.Tests.Task02Tests
             var circle = new Circle(radius);
             return circle.Square();
         }
-
     }
 }
