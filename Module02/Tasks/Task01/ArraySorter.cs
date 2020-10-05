@@ -5,8 +5,6 @@
 namespace Tasks
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Refactor the sorting algorithm from Module 1 (don't use delegates and standard interfaces), allowing to sorting both in ascending and descending directions,
