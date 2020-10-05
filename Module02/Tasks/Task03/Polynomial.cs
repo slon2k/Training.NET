@@ -96,13 +96,21 @@ namespace Tasks.Task03
         /// Overload of - operator.
         /// </summary>
         /// <param name="p">Polynomial.</param>
-        /// <returns>Same Polynomial.</returns>
+        /// <returns>Polynomial multiplied by -1.</returns>
         public static Polynomial operator -(Polynomial p)
         {
             var coefficients = p.GetCoefficients();
             var inversed = Inverse(coefficients);
             return new Polynomial(inversed);
         }
+
+        /// <summary>
+        /// Overloading the subtraction operator.
+        /// </summary>
+        /// <param name="p1">Polynomial 1.</param>
+        /// <param name="p2">Polynomial 2.</param>
+        /// <returns>Same Polynomial.</returns>
+        public static Polynomial operator -(Polynomial p1, Polynomial p2) => p1 + (-p2);
 
         /// <summary>
         /// Gets the coefficients.

@@ -4,9 +4,6 @@
 
 namespace Tasks.Tests.Task03Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using NUnit.Framework;
     using Tasks.Task03;
 
@@ -60,6 +57,22 @@ namespace Tasks.Tests.Task03Tests
             var p1 = new Polynomial(coefficients);
             var p2 = -p1;
             return p2.GetCoefficients();
+        }
+
+        /// <summary>
+        /// Checking subtraction for Polynomials.
+        /// </summary>
+        /// <param name="coefficients1">Polynomial 1.</param>
+        /// <param name="coefficients2">Polynomial 2.</param>
+        /// <returns>Difference.</returns>
+        [TestCase(new double[] { 1, 1, 1 }, new double[] { 1, 2 }, ExpectedResult = new double[] { 1, 0, -1 })]
+        [TestCase(new double[] { 1, 1, 1 }, new double[] { 1, 1, 0 }, ExpectedResult = new double[] { 1 })]
+        public double[] CheckSubtractionForPolynomials(double[] coefficients1, double[] coefficients2)
+        {
+            var p1 = new Polynomial(coefficients1);
+            var p2 = new Polynomial(coefficients2);
+            var p3 = p1 - p2;
+            return p3.GetCoefficients();
         }
     }
 }
