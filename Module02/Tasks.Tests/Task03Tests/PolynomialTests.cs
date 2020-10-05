@@ -74,5 +74,19 @@ namespace Tasks.Tests.Task03Tests
             var p3 = p1 - p2;
             return p3.GetCoefficients();
         }
+
+        /// <summary>
+        /// Checking multiplication by number.
+        /// </summary>
+        /// <param name="coefficients">Polynomial.</param>
+        /// <param name="number">Number.</param>
+        /// <returns>Result.</returns>
+        [TestCase(new double[] { 1, -2, 1 }, 2, ExpectedResult = new double[] { 2, -4, 2 })]
+        public double[] CheckMultiplicationByNumber(double[] coefficients, double number)
+        {
+            var p1 = new Polynomial(coefficients);
+            var p2 = p1 * number;
+            return p2.GetCoefficients();
+        }
     }
 }

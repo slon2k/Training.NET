@@ -113,6 +113,30 @@ namespace Tasks.Task03
         public static Polynomial operator -(Polynomial p1, Polynomial p2) => p1 + (-p2);
 
         /// <summary>
+        /// Multiplying Polynomial by number.
+        /// </summary>
+        /// <param name="p">Polynomial.</param>
+        /// <param name="number">Number.</param>
+        /// <returns>Output polynomial.</returns>
+        public static Polynomial operator *(Polynomial p, double number)
+        {
+            if (number == 0)
+            {
+                return new Polynomial(0);
+            }
+
+            var coefficients = p.GetCoefficients();
+            for (int i = 0; i < coefficients.Length; i++)
+            {
+                coefficients[i] *= number;
+            }
+
+            return new Polynomial(coefficients);
+        }
+
+        public static Polynomial operator *(double number, Polynomial p) => p * number;
+
+        /// <summary>
         /// Gets the coefficients.
         /// </summary>
         /// <returns>Coefficients.</returns>
