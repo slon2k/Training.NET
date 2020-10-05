@@ -1,4 +1,4 @@
-﻿// <copyright file="Task01.cs" company="Boris Korobeinikov">
+﻿// <copyright file="ArraySorter.cs" company="Boris Korobeinikov">
 // Copyright (c) Boris Korobeinikov. All rights reserved.
 // </copyright>
 
@@ -12,7 +12,7 @@ namespace Tasks
     /// Refactor the sorting algorithm from Module 1 (don't use delegates and standard interfaces), allowing to sorting both in ascending and descending directions,
     /// depending on comparison criterion of the matrix rows.
     /// </summary>
-    public static class Task01
+    public static class ArraySorter
     {
         /// <summary>
         /// Sorts rows of given array.

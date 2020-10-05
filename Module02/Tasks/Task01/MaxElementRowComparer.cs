@@ -5,8 +5,6 @@
 namespace Tasks.Task01
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Compares rows by maximum element in a row.
