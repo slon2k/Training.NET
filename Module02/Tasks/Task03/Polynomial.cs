@@ -134,6 +134,12 @@ namespace Tasks.Task03
             return new Polynomial(coefficients);
         }
 
+        /// <summary>
+        /// Multiplication number by Polynomial.
+        /// </summary>
+        /// <param name="p">Polynomial.</param>
+        /// <param name="number">Number.</param>
+        /// <returns>Output polynomial.</returns>
         public static Polynomial operator *(double number, Polynomial p) => p * number;
 
         /// <summary>
