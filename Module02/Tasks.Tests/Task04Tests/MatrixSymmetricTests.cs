@@ -1,4 +1,4 @@
-﻿// <copyright file="MatrixSquareTests.cs" company="Boris Korobeinikov">
+﻿// <copyright file="MatrixSymmetricTests.cs" company="Boris Korobeinikov">
 // Copyright (c) Boris Korobeinikov. All rights reserved.
 // </copyright>
 
@@ -9,10 +9,10 @@ namespace Tasks.Tests.Task04Tests
     using Tasks.Task04;
 
     /// <summary>
-    /// Tests for MatrixSquare.
+    /// Tests for MatrixSymmetric.
     /// </summary>
     [TestFixture]
-    public class MatrixSquareTests
+    public class MatrixSymmetricTests
     {
         private static readonly int[,] Array1 = new int[,]
         {
@@ -51,7 +51,6 @@ namespace Tasks.Tests.Task04Tests
 
         private static readonly object[] TestDataCreating =
         {
-            new object[] { Array1 },
             new object[] { Array2 },
             new object[] { Array3 },
         };
@@ -59,6 +58,7 @@ namespace Tasks.Tests.Task04Tests
         private static readonly object[] TestDataArgumentExcepton =
         {
             new object[] { Array4 },
+            new object[] { Array1 },
         };
 
         private static readonly object[] TestDataSetValue =
@@ -73,7 +73,7 @@ namespace Tasks.Tests.Task04Tests
         [TestCaseSource("TestDataCreating")]
         public void CheckCreatingMatrix(int[,] array)
         {
-            var matrix = new MatrixSquare<int>(array);
+            var matrix = new MatrixSymmetric<int>(array);
             Assert.That(matrix.Values, Is.EqualTo(array));
         }
 
@@ -84,7 +84,7 @@ namespace Tasks.Tests.Task04Tests
         [TestCaseSource("TestDataArgumentExcepton")]
         public void CheckCreatingMatrixArgumentExcepton(int[,] array)
         {
-            Assert.That(() => new MatrixSquare<int>(array), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => new MatrixSymmetric<int>(array), Throws.TypeOf<ArgumentException>());
         }
 
         /// <summary>
@@ -95,21 +95,9 @@ namespace Tasks.Tests.Task04Tests
         [TestCaseSource("TestDataSetValue")]
         public void CheckUpdatingMatrix(int[,] array, int[,] expected)
         {
-            var matrix = new MatrixSquare<int>(array);
+            var matrix = new MatrixSymmetric<int>(array);
             matrix.SetValue(1, 2, 1);
-            matrix.SetValue(1, 1, 2);
             Assert.That(matrix.Values, Is.EqualTo(expected));
-        }
-
-        /// <summary>
-        /// Tests ArgumentOutOfRangeException.
-        /// </summary>
-        /// <param name="size">Size.</param>
-        [TestCase(0)]
-        [TestCase(-1)]
-        public void CheckCreatingMatrixArgumentExcepton(int size)
-        {
-            Assert.That(() => new MatrixSquare<int>(size), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
     }
 }
