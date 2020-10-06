@@ -1,4 +1,4 @@
-﻿// <copyright file="MatrixSymmetric.cs" company="Boris Korobeinikov">
+﻿// <copyright file="MatrixDiagonal.cs" company="Boris Korobeinikov">
 // Copyright (c) Boris Korobeinikov. All rights reserved.
 // </copyright>
 
@@ -7,35 +7,35 @@ namespace Tasks.Task04
     using System;
 
     /// <summary>
-    /// Symmetric matrix.
+    /// Diagonal matrix.
     /// </summary>
     /// <typeparam name="T">Type of values.</typeparam>
-    public class MatrixSymmetric<T> : MatrixSquare<T>
+    public class MatrixDiagonal<T> : MatrixSymmetric<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MatrixSymmetric{T}"/> class.
+        /// Initializes a new instance of the <see cref="MatrixDiagonal{T}"/> class.
         /// </summary>
         /// <param name="size">Size.</param>
-        public MatrixSymmetric(int size)
+        public MatrixDiagonal(int size)
             : base(size)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MatrixSymmetric{T}"/> class.
+        /// Initializes a new instance of the <see cref="MatrixDiagonal{T}"/> class.
         /// </summary>
         /// <param name="array">Sourse array.</param>
-        public MatrixSymmetric(T[,] array)
+        public MatrixDiagonal(T[,] array)
             : base(array)
         {
-            if (!this.IsSymmetric(array))
+            if (!this.IsDiagonal(array))
             {
-                throw new ArgumentException("Array is not symmetric");
+                throw new ArgumentException("Array is not diagonal");
             }
         }
 
         /// <summary>
-        /// Sets values to symmetric cells.
+        /// Sets values to diagonal cells.
         /// </summary>
         /// <param name="value">Value.</param>
         /// <param name="i">Index 1.</param>
@@ -47,11 +47,15 @@ namespace Tasks.Task04
                 throw new ArgumentOutOfRangeException("Index is out of range.");
             }
 
-            this.Values[i, j] = value;
-            this.Values[j, i] = value;
+            if (i != j)
+            {
+                throw new ArgumentException("Invalid arguments");
+            }
+
+            this.Values[i, i] = value;
         }
 
-        private bool IsSymmetric(T[,] array)
+        private bool IsDiagonal(T[,] array)
         {
             if (array.GetLength(0) != array.GetLength(1))
             {
@@ -62,7 +66,12 @@ namespace Tasks.Task04
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    if (!array[i, j].Equals(array[j, i]))
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
+                    if (!array[i, j].Equals(default(T)))
                     {
                         return false;
                     }

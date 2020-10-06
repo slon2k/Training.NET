@@ -49,6 +49,26 @@ namespace Tasks.Task04
             }
         }
 
+        //public static MatrixSquare<T> operator +(MatrixSquare<T> m1, MatrixSquare<T> m2)
+        //{
+        //    if (m1.Size != m2.Size)
+        //    {
+        //        throw new ArgumentException("Invalid size.");
+        //    }
+
+        //    int size = m1.Size;
+
+        //    var array = new int[size, size];
+        //    for (int i = 0; i < size - 1; i++)
+        //    {
+        //        for (int j = 0; j < size - 1; j++)
+        //        {
+        //            array[i, j] = m1.Values[i, j] + m2.Values[i, j];
+        //        }
+        //    }
+        //    return new MatrixSquare<int>(array);
+        //}
+
         /// <summary>
         /// Gets values.
         /// </summary>
@@ -75,6 +95,11 @@ namespace Tasks.Task04
             this.Values[i, j] = value;
         }
 
-        private bool IsInRange(int number) => number >= 0 && number < this.Size;
+        /// <summary>
+        /// Checks if the number is valid.
+        /// </summary>
+        /// <param name="number">Number.</param>
+        /// <returns>True if the number is valid.</returns>
+        protected bool IsInRange(int number) => number >= 0 && number < this.Size;
     }
 }
