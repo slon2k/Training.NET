@@ -9,7 +9,7 @@ namespace Tasks.Task04
     /// <summary>
     /// Square matrix.
     /// </summary>
-    /// <typeparam name="T">Type of values</typeparam>
+    /// <typeparam name="T">Type of values.</typeparam>
     public class MatrixSquare<T>
     {
         /// <summary>
@@ -18,6 +18,11 @@ namespace Tasks.Task04
         /// <param name="size">Size of the matrix.</param>
         public MatrixSquare(int size)
         {
+            if (size <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(size));
+            }
+
             this.Size = size;
             this.Values = new T[size, size];
         }
