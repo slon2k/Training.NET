@@ -49,7 +49,7 @@ namespace Tasks.Tests.Task03Tests
         /// Checking - for Polynomials.
         /// </summary>
         /// <param name="coefficients">Polynomial.</param>
-        /// <returns>-Polynomial.</returns>
+        /// <returns>The resulting polynomial.</returns>
         [TestCase(new double[] { 1, 2, 3 }, ExpectedResult = new double[] { -1, -2, -3 })]
         [TestCase(new double[] { 1, 0, -1 }, ExpectedResult = new double[] { -1, 0, 1 })]
         public double[] CheckMinusForPolynomials(double[] coefficients)
@@ -64,9 +64,10 @@ namespace Tasks.Tests.Task03Tests
         /// </summary>
         /// <param name="coefficients1">Polynomial 1.</param>
         /// <param name="coefficients2">Polynomial 2.</param>
-        /// <returns>Difference.</returns>
+        /// <returns>The resulting polynomial.</returns>
         [TestCase(new double[] { 1, 1, 1 }, new double[] { 1, 2 }, ExpectedResult = new double[] { 1, 0, -1 })]
         [TestCase(new double[] { 1, 1, 1 }, new double[] { 1, 1, 0 }, ExpectedResult = new double[] { 1 })]
+        [TestCase(new double[] { 1, 1, 1 }, new double[] { 1, 1, 1 }, ExpectedResult = new double[] { 0 })]
         public double[] CheckSubtractionForPolynomials(double[] coefficients1, double[] coefficients2)
         {
             var p1 = new Polynomial(coefficients1);
@@ -80,13 +81,31 @@ namespace Tasks.Tests.Task03Tests
         /// </summary>
         /// <param name="coefficients">Polynomial.</param>
         /// <param name="number">Number.</param>
-        /// <returns>Result.</returns>
+        /// <returns>The resulting polynomial.</returns>
         [TestCase(new double[] { 1, -2, 1 }, 2, ExpectedResult = new double[] { 2, -4, 2 })]
         public double[] CheckMultiplicationByNumber(double[] coefficients, double number)
         {
             var p1 = new Polynomial(coefficients);
             var p2 = p1 * number;
             return p2.GetCoefficients();
+        }
+
+        /// <summary>
+        /// Checking miltiplication of Polynomials.
+        /// </summary>
+        /// <param name="coefficients1">Polynomial 1.</param>
+        /// <param name="coefficients2">Polynomial 2.</param>
+        /// <returns>The resulting polynomial.</returns>
+        [TestCase(new double[] { 1, 1 }, new double[] { 1, -1 }, ExpectedResult = new double[] { 1, 0, -1 })]
+        [TestCase(new double[] { 1, -1 }, new double[] { 1, -1 }, ExpectedResult = new double[] { 1, -2, 1 })]
+        [TestCase(new double[] { 1, 2, 1 }, new double[] { 1, 1 }, ExpectedResult = new double[] { 1, 3, 3, 1 })]
+        [TestCase(new double[] { 1, 2, 1 }, new double[] { 1, 2, 1 }, ExpectedResult = new double[] { 1, 4, 6, 4, 1 })]
+        public double[] CheckMultiplicationOfPolynomials(double[] coefficients1, double[] coefficients2)
+        {
+            var p1 = new Polynomial(coefficients1);
+            var p2 = new Polynomial(coefficients2);
+            var p3 = p1 * p2;
+            return p3.GetCoefficients();
         }
     }
 }

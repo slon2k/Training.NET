@@ -61,11 +61,11 @@ namespace Tasks.Task03
         public static Polynomial operator +(Polynomial p) => p;
 
         /// <summary>
-        /// Overload of + operator.
+        /// Sum of Polynomials.
         /// </summary>
         /// <param name="p1">Polynomial 1.</param>
         /// <param name="p2">Polynomial 2.</param>
-        /// <returns>Sum of Polynomials.</returns>
+        /// <returns>The resulting polynomial.</returns>
         public static Polynomial operator +(Polynomial p1, Polynomial p2)
         {
             int degree = Math.Max(p1.Degree, p2.Degree);
@@ -105,19 +105,19 @@ namespace Tasks.Task03
         }
 
         /// <summary>
-        /// Overloading the subtraction operator.
+        /// Subtraction of Polynomials.
         /// </summary>
         /// <param name="p1">Polynomial 1.</param>
         /// <param name="p2">Polynomial 2.</param>
-        /// <returns>Same Polynomial.</returns>
+        /// <returns>The resulting polynomial.</returns>
         public static Polynomial operator -(Polynomial p1, Polynomial p2) => p1 + (-p2);
 
         /// <summary>
-        /// Multiplying Polynomial by number.
+        /// Multiplication a Polynomial by a number.
         /// </summary>
         /// <param name="p">Polynomial.</param>
         /// <param name="number">Number.</param>
-        /// <returns>Output polynomial.</returns>
+        /// <returns>The resulting polynomial.</returns>
         public static Polynomial operator *(Polynomial p, double number)
         {
             if (number == 0)
@@ -135,12 +135,37 @@ namespace Tasks.Task03
         }
 
         /// <summary>
-        /// Multiplication number by Polynomial.
+        /// Multiplication a number by a Polynomial.
         /// </summary>
         /// <param name="p">Polynomial.</param>
         /// <param name="number">Number.</param>
-        /// <returns>Output polynomial.</returns>
+        /// <returns>The resulting polynomial.</returns>
         public static Polynomial operator *(double number, Polynomial p) => p * number;
+
+        /// <summary>
+        /// Multiplication of Polynomials.
+        /// </summary>
+        /// <param name="p1">Polynomial 1.</param>
+        /// <param name="p2">Polynomial 2.</param>
+        /// <returns>The resulting polynomial.</returns>
+        public static Polynomial operator *(Polynomial p1, Polynomial p2)
+        {
+            int degree = p1.Degree + p2.Degree;
+            var coefficients = new double[degree + 1];
+            var coefficients1 = p1.Coefficients;
+            var coefficients2 = p2.Coefficients;
+            for (int i = 0; i < coefficients1.Length; i++)
+            {
+                for (int j = 0; j < coefficients2.Length; j++)
+                {
+                    coefficients[i + j] += coefficients1[i] * coefficients2[j];
+                }
+            }
+
+            Reverse(coefficients);
+
+            return new Polynomial(coefficients);
+        }
 
         /// <summary>
         /// Gets the coefficients.
