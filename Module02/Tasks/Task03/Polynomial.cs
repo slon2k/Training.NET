@@ -93,6 +93,22 @@ namespace Tasks.Task03
         }
 
         /// <summary>
+        /// Adding a Polynomial to a number.
+        /// </summary>
+        /// <param name="p">Polynomial.</param>
+        /// <param name="number">Number.</param>
+        /// <returns>The resulting polynomial.</returns>
+        public static Polynomial operator +(Polynomial p, double number) => p + new Polynomial(number);
+
+        /// <summary>
+        /// Adding a number to a Polynomial.
+        /// </summary>
+        /// <param name="p">Polynomial.</param>
+        /// <param name="number">Number.</param>
+        /// <returns>The resulting polynomial.</returns>
+        public static Polynomial operator +(double number, Polynomial p) => p + new Polynomial(number);
+
+        /// <summary>
         /// Overload of - operator.
         /// </summary>
         /// <param name="p">Polynomial.</param>
@@ -118,21 +134,7 @@ namespace Tasks.Task03
         /// <param name="p">Polynomial.</param>
         /// <param name="number">Number.</param>
         /// <returns>The resulting polynomial.</returns>
-        public static Polynomial operator *(Polynomial p, double number)
-        {
-            if (number == 0)
-            {
-                return new Polynomial(0);
-            }
-
-            var coefficients = p.GetCoefficients();
-            for (int i = 0; i < coefficients.Length; i++)
-            {
-                coefficients[i] *= number;
-            }
-
-            return new Polynomial(coefficients);
-        }
+        public static Polynomial operator *(Polynomial p, double number) => p * new Polynomial(number);
 
         /// <summary>
         /// Multiplication a number by a Polynomial.
@@ -140,7 +142,7 @@ namespace Tasks.Task03
         /// <param name="p">Polynomial.</param>
         /// <param name="number">Number.</param>
         /// <returns>The resulting polynomial.</returns>
-        public static Polynomial operator *(double number, Polynomial p) => p * number;
+        public static Polynomial operator *(double number, Polynomial p) => p * new Polynomial(number);
 
         /// <summary>
         /// Multiplication of Polynomials.
@@ -164,7 +166,14 @@ namespace Tasks.Task03
 
             Reverse(coefficients);
 
-            return new Polynomial(coefficients);
+            int index = NonZeroIndex(coefficients);
+
+            if (index == -1)
+            {
+                return new Polynomial(0);
+            }
+
+            return new Polynomial(coefficients[index..coefficients.Length]);
         }
 
         /// <summary>
