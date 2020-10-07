@@ -6,6 +6,7 @@ namespace Tasks.Framework
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection.Metadata.Ecma335;
     using System.Text;
 
     /// <summary>
@@ -33,6 +34,16 @@ namespace Tasks.Framework
             /// Gets or sets revenue.
             /// </summary>
             public decimal Revenue { get; set; }
+
+            /// <summary>
+            /// Record including customer properties.
+            /// </summary>
+            /// <param name="options">Fields to include: "name", "phone", "revenue".</param>
+            /// <returns>Customer record.</returns>
+            public string CustomerRecord(params string[] options)
+            {
+                return "0";
+            }
         }
     }
 }
