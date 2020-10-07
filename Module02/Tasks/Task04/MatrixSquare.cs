@@ -99,6 +99,8 @@ namespace Tasks.Task04
             }
 
             this.Values[i, j] = value;
+
+            Console.WriteLine($"Added value {value} to ({i}, {j})");
         }
 
         /// <summary>

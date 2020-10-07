@@ -52,6 +52,8 @@ namespace Tasks.Task04
             }
 
             this.Values[i, i] = value;
+
+            Console.WriteLine($"Added value {value} to ({i}, {j})");
         }
 
         private bool IsDiagonal(double[,] array)

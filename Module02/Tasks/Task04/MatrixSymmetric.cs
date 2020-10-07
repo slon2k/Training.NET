@@ -34,6 +34,18 @@ namespace Tasks.Task04
         }
 
         /// <summary>
+        /// Addition operator.
+        /// </summary>
+        /// <param name="m1">Matrix 1.</param>
+        /// <param name="m2">Matrix 2.</param>
+        /// <returns>Sum of matrices.</returns>
+        public static MatrixSymmetric operator +(MatrixSymmetric m1, MatrixSymmetric m2)
+        {
+            var sum = (MatrixSquare)m1 + (MatrixSquare)m2;
+            return new MatrixSymmetric(sum.Values);
+        }
+
+        /// <summary>
         /// Sets values to symmetric cells.
         /// </summary>
         /// <param name="value">Value.</param>
@@ -48,6 +60,9 @@ namespace Tasks.Task04
 
             this.Values[i, j] = value;
             this.Values[j, i] = value;
+
+
+            Console.WriteLine($"Added values: {value} to ({i}, {j}), {value} to ({j}, {i})");
         }
 
         private bool IsSymmetric(double[,] array)

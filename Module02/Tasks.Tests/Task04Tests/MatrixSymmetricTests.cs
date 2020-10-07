@@ -30,9 +30,9 @@ namespace Tasks.Tests.Task04Tests
 
         private static readonly double[,] Array6 = new double[,]
 {
-            { 3, 4, 5 },
-            { 3, 4, 5 },
-            { 3, 4, 2 },
+            { 0, 2, 4 },
+            { 2, 4, 6 },
+            { 4, 6, 2 },
 };
 
         private static readonly double[,] Array3 = new double[,]
@@ -75,7 +75,7 @@ namespace Tasks.Tests.Task04Tests
 
         private static readonly object[] TestDataAddition =
         {
-            new object[] { Array1, Array2, Array6 },
+            new object[] { Array2, Array2, Array6 },
         };
 
         /// <summary>
@@ -119,14 +119,16 @@ namespace Tasks.Tests.Task04Tests
         /// <param name="array2">Second matrix.</param>
         /// <param name="expected">Sum of matrices.</param>
         [TestCaseSource("TestDataAddition")]
-        public void CheckAddingMatrices(double[,] array1, double[,] array2, double[,] expected)
+        public void CheckAddingSymmetricMatrices(double[,] array1, double[,] array2, double[,] expected)
         {
-            var matrix1 = new MatrixSquare(array1);
+            var matrix1 = new MatrixSymmetric(array1);
             var matrix2 = new MatrixSymmetric(array2);
-            var sum = matrix1 + matrix2;
-            Assert.That(sum.Values, Is.EqualTo(expected));
+            var sum1 = matrix1 + matrix2;
+            Assert.That(sum1.Values, Is.EqualTo(expected));
 
-            var m3 = matrix2 + matrix2;
+            var matrix3 = new MatrixSquare(array1);
+            var sum2 = matrix2 + matrix3;
+            Assert.That(sum2.Values, Is.EqualTo(expected));
         }
     }
 }
