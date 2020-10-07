@@ -21,6 +21,13 @@ namespace Tasks.Tests.Task04Tests
             { 1, 1, 1 },
         };
 
+        private static readonly double[,] Array6 = new double[,]
+        {
+            { 6, 6, 6 },
+            { 4, 4, 4 },
+            { 2, 2, 2 },
+        };
+
         private static readonly double[,] Array2 = new double[,]
         {
             { 0, 1, 2 },
@@ -54,6 +61,11 @@ namespace Tasks.Tests.Task04Tests
             new object[] { Array1 },
             new object[] { Array2 },
             new object[] { Array3 },
+        };
+
+        private static readonly object[] TestDataAddition =
+        {
+            new object[] { Array1, Array1, Array6 },
         };
 
         private static readonly object[] TestDataArgumentExcepton =
@@ -110,6 +122,21 @@ namespace Tasks.Tests.Task04Tests
         public void CheckCreatingMatrixArgumentExcepton(int size)
         {
             Assert.That(() => new MatrixSquare(size), Throws.TypeOf<ArgumentOutOfRangeException>());
+        }
+
+        /// <summary>
+        /// Tests for addition of matrices.
+        /// </summary>
+        /// <param name="array1">First matrix.</param>
+        /// <param name="array2">Second matrix.</param>
+        /// <param name="expected">Sum of matrices.</param>
+        [TestCaseSource("TestDataAddition")]
+        public void CheckAddingMatrices(double[,] array1, double[,] array2, double[,] expected)
+        {
+            var matrix1 = new MatrixSquare(array1);
+            var matrix2 = new MatrixSquare(array2);
+            var sum = matrix1 + matrix2;
+            Assert.That(sum.Values, Is.EqualTo(expected));
         }
     }
 }

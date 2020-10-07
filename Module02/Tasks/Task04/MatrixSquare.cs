@@ -74,9 +74,9 @@ namespace Tasks.Task04
             int size = m1.Size;
 
             var array = new double[size, size];
-            for (int i = 0; i < size - 1; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < size - 1; j++)
+                for (int j = 0; j < size; j++)
                 {
                     array[i, j] = m1.Values[i, j] + m2.Values[i, j];
                 }
