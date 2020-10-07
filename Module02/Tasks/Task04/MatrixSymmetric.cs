@@ -9,11 +9,10 @@ namespace Tasks.Task04
     /// <summary>
     /// Symmetric matrix.
     /// </summary>
-    /// <typeparam name="T">Type of values.</typeparam>
-    public class MatrixSymmetric<T> : MatrixSquare<T>
+    public class MatrixSymmetric : MatrixSquare
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MatrixSymmetric{T}"/> class.
+        /// Initializes a new instance of the <see cref="MatrixSymmetric"/> class.
         /// </summary>
         /// <param name="size">Size.</param>
         public MatrixSymmetric(int size)
@@ -22,10 +21,10 @@ namespace Tasks.Task04
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MatrixSymmetric{T}"/> class.
+        /// Initializes a new instance of the <see cref="MatrixSymmetric"/> class.
         /// </summary>
         /// <param name="array">Sourse array.</param>
-        public MatrixSymmetric(T[,] array)
+        public MatrixSymmetric(double[,] array)
             : base(array)
         {
             if (!this.IsSymmetric(array))
@@ -40,7 +39,7 @@ namespace Tasks.Task04
         /// <param name="value">Value.</param>
         /// <param name="i">Index 1.</param>
         /// <param name="j">Index 2.</param>
-        public new void SetValue(T value, int i, int j)
+        public new void SetValue(double value, int i, int j)
         {
             if (!this.IsInRange(i) || !this.IsInRange(j))
             {
@@ -51,7 +50,7 @@ namespace Tasks.Task04
             this.Values[j, i] = value;
         }
 
-        private bool IsSymmetric(T[,] array)
+        private bool IsSymmetric(double[,] array)
         {
             if (array.GetLength(0) != array.GetLength(1))
             {

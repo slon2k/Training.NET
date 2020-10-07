@@ -9,11 +9,10 @@ namespace Tasks.Task04
     /// <summary>
     /// Diagonal matrix.
     /// </summary>
-    /// <typeparam name="T">Type of values.</typeparam>
-    public class MatrixDiagonal<T> : MatrixSymmetric<T>
+    public class MatrixDiagonal : MatrixSymmetric
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MatrixDiagonal{T}"/> class.
+        /// Initializes a new instance of the <see cref="MatrixDiagonal"/> class.
         /// </summary>
         /// <param name="size">Size.</param>
         public MatrixDiagonal(int size)
@@ -22,10 +21,10 @@ namespace Tasks.Task04
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MatrixDiagonal{T}"/> class.
+        /// Initializes a new instance of the <see cref="MatrixDiagonal"/> class.
         /// </summary>
         /// <param name="array">Sourse array.</param>
-        public MatrixDiagonal(T[,] array)
+        public MatrixDiagonal(double[,] array)
             : base(array)
         {
             if (!this.IsDiagonal(array))
@@ -40,7 +39,7 @@ namespace Tasks.Task04
         /// <param name="value">Value.</param>
         /// <param name="i">Index 1.</param>
         /// <param name="j">Index 2.</param>
-        public new void SetValue(T value, int i, int j)
+        public new void SetValue(double value, int i, int j)
         {
             if (!this.IsInRange(i) || !this.IsInRange(j))
             {
@@ -55,7 +54,7 @@ namespace Tasks.Task04
             this.Values[i, i] = value;
         }
 
-        private bool IsDiagonal(T[,] array)
+        private bool IsDiagonal(double[,] array)
         {
             if (array.GetLength(0) != array.GetLength(1))
             {
@@ -71,7 +70,7 @@ namespace Tasks.Task04
                         continue;
                     }
 
-                    if (!array[i, j].Equals(default(T)))
+                    if (!array[i, j].Equals(default))
                     {
                         return false;
                     }

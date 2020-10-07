@@ -14,35 +14,35 @@ namespace Tasks.Tests.Task04Tests
     [TestFixture]
     public class MatrixSymmetricTests
     {
-        private static readonly int[,] Array1 = new int[,]
+        private static readonly double[,] Array1 = new double[,]
         {
             { 3, 3, 3 },
             { 2, 2, 2 },
             { 1, 1, 1 },
         };
 
-        private static readonly int[,] Array2 = new int[,]
+        private static readonly double[,] Array2 = new double[,]
         {
             { 0, 1, 2 },
             { 1, 2, 3 },
             { 2, 3, 1 },
         };
 
-        private static readonly int[,] Array3 = new int[,]
+        private static readonly double[,] Array3 = new double[,]
         {
             { 1, 0, 0 },
             { 0, 2, 0 },
             { 0, 0, 3 },
         };
 
-        private static readonly int[,] Array4 = new int[,]
+        private static readonly double[,] Array4 = new double[,]
         {
             { 1, 0 },
             { 0, 2 },
             { 0, 0 },
         };
 
-        private static readonly int[,] Array5 = new int[,]
+        private static readonly double[,] Array5 = new double[,]
         {
             { 0, 1, 2 },
             { 1, 2, 1 },
@@ -71,9 +71,9 @@ namespace Tasks.Tests.Task04Tests
         /// </summary>
         /// <param name="array">Initial array.</param>
         [TestCaseSource("TestDataCreating")]
-        public void CheckCreatingMatrix(int[,] array)
+        public void CheckCreatingMatrix(double[,] array)
         {
-            var matrix = new MatrixSymmetric<int>(array);
+            var matrix = new MatrixSymmetric(array);
             Assert.That(matrix.Values, Is.EqualTo(array));
         }
 
@@ -82,9 +82,9 @@ namespace Tasks.Tests.Task04Tests
         /// </summary>
         /// <param name="array">Initial array.</param>
         [TestCaseSource("TestDataArgumentExcepton")]
-        public void CheckCreatingMatrixArgumentExcepton(int[,] array)
+        public void CheckCreatingMatrixArgumentExcepton(double[,] array)
         {
-            Assert.That(() => new MatrixSymmetric<int>(array), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => new MatrixSymmetric(array), Throws.TypeOf<ArgumentException>());
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace Tasks.Tests.Task04Tests
         /// <param name="array">Initial array.</param>
         /// <param name="expected">Expected result.</param>
         [TestCaseSource("TestDataSetValue")]
-        public void CheckUpdatingMatrix(int[,] array, int[,] expected)
+        public void CheckUpdatingMatrix(double[,] array, double[,] expected)
         {
-            var matrix = new MatrixSymmetric<int>(array);
+            var matrix = new MatrixSymmetric(array);
             matrix.SetValue(1, 2, 1);
             Assert.That(matrix.Values, Is.EqualTo(expected));
         }
