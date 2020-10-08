@@ -2,10 +2,6 @@
 // Copyright (c) Boris Korobeinikov. All rights reserved.
 // </copyright>
 
-/// <summary>
-/// Customer class has three public properties - Name (string), ContactPhone (string) and Revenue (decimal).
-/// Implement for the Customer's objects the capability of a various string representation.
-/// </summary>
 namespace Tasks.Framework.Task101
 {
     /// <summary>

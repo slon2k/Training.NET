@@ -9,7 +9,9 @@ namespace Tasks.Framework.Task101
     using System.Linq;
 
     /// <summary>
-    /// Extensions for Customer class.
+    /// Task 1.
+    /// Customer class has three public properties - Name (string), ContactPhone (string) and Revenue (decimal).
+    /// Implement for the Customer's objects the capability of a various string representation.
     /// </summary>
     public static class CustomerExtensions
     {
