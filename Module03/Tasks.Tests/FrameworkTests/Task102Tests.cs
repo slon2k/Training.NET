@@ -4,9 +4,6 @@
 
 namespace Tasks.Tests.FrameworkTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using NUnit.Framework;
     using static Tasks.Framework.Task102.StringUtils;
 

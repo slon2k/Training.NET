@@ -6,7 +6,7 @@ namespace Tasks.Framework.Task102
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using System.Linq;
 
     /// <summary>
     /// Write a function that will convert a string into title case, given an optional list of exceptions (minor words).
@@ -21,7 +21,27 @@ namespace Tasks.Framework.Task102
         /// <returns>String in title case.</returns>
         public static string ConvertToTitleCase(string originalString, string minorWords = null)
         {
-            return "0";
+            if (string.IsNullOrEmpty(originalString))
+            {
+                throw new ArgumentNullException(nameof(originalString));
+            }
+
+            var minors = !string.IsNullOrWhiteSpace(minorWords) ? minorWords.Split().ToList<string>() : new List<string>();
+
+            var wordsToExclude = new HashSet<string>(minors.Select(w => w.ToLowerInvariant()));
+
+            var words = originalString.Split();
+
+            var wordsInTitleCase = words.Select(word => wordsToExclude.Contains(word.ToLowerInvariant()) ? word.ToLowerInvariant() : Capitalize(word)).ToList();
+
+            wordsInTitleCase[0] = Capitalize(wordsInTitleCase[0]);
+
+            return string.Join(" ", wordsInTitleCase);
+        }
+
+        private static string Capitalize(string word)
+        {
+            return $"{word.Substring(0, 1).ToUpperInvariant()}{word.Substring(1).ToLowerInvariant()}";
         }
     }
 }
