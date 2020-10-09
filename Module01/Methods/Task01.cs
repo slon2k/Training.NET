@@ -19,8 +19,7 @@ namespace Methods
         private const string NaN = "1111111111111000000000000000000000000000000000000000000000000000";
         private const string NegativeInfinity = "1111111111110000000000000000000000000000000000000000000000000000";
         private const string PositiveInfinity = "0111111111110000000000000000000000000000000000000000000000000000";
-        private const string PositiveZero = "0000000000000000000000000000000000000000000000000000000000000000";
-        private const string NegativeZero = "1000000000000000000000000000000000000000000000000000000000000000";
+        private const string Zero = "000000000000000000000000000000000000000000000000000000000000000";
         private const int BaseExponent = 1023;
         private const int BitsExponent = 11;
         private const int BitsMantissa = 52;
@@ -32,6 +31,7 @@ namespace Methods
         /// <returns>String in the IEEE 754 format.</returns>
         public static string ToIEEE754(this double number)
         {
+            char sign = double.IsNegative(number) ? '1' : '0';
             return number switch
             {
                 double.MinValue => MinValue,
@@ -40,7 +40,7 @@ namespace Methods
                 double.NaN => NaN,
                 double.NegativeInfinity => NegativeInfinity,
                 double.PositiveInfinity => PositiveInfinity,
-                0.0d => PositiveZero,
+                0.0d => $"{sign}{Zero}",
                 _ => ConvertToIEEE(number)
             };
         }
