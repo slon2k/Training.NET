@@ -34,7 +34,7 @@ namespace CreatingTypes.Tests
         {
             double result = Task01.FindNthRoot(number, degree, precision);
 
-            Assert.That(Math.Abs(expected - result) < precision);
+            Assert.That(Math.Abs(expected - result), Is.LessThan(precision));
         }
 
         /// <summary>

@@ -111,7 +111,7 @@ namespace CreatingTypes.Tests
         [TestCaseSource("ComparingBySumTestData")]
         public void CheckComparingBySumOfRow(int[,] array, int row1, int row2, bool expected)
         {
-            Assert.That(CompareBySumOfRow(array, row1, row2) == expected);
+            Assert.That(CompareBySumOfRow(array, row1, row2), Is.EqualTo(expected));
         }
 
         /// <summary>
@@ -124,34 +124,13 @@ namespace CreatingTypes.Tests
         public void CheckSorting(int[,] array, bool ascending, int[,] expected)
         {
             SortRows(array, CompareByMaxElement, ascending);
-            Assert.That(this.ArraysAreEqual(array, expected));
+            Assert.That(array, Is.EqualTo(expected));
             SortRows(array, CompareByMaxElement, !ascending);
             SortRows(array, CompareByMinElement, ascending);
-            Assert.That(this.ArraysAreEqual(array, expected));
+            Assert.That(array, Is.EqualTo(expected));
             SortRows(array, CompareByMinElement, !ascending);
             SortRows(array, CompareBySumOfRow, ascending);
-            Assert.That(this.ArraysAreEqual(array, expected));
-        }
-
-        private bool ArraysAreEqual(int[,] a1, int[,] a2)
-        {
-            if (a1.GetLength(0) != a2.GetLength(0) || a1.GetLength(0) != a2.GetLength(0))
-            {
-                throw new ArgumentException("Dimensions of the arrays are not the same");
-            }
-
-            for (int i = 0; i < a1.GetLength(0); i++)
-            {
-                for (int j = 0; j < a2.GetLength(1); j++)
-                {
-                    if (a1[i, j] != a2[i, j])
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            Assert.That(array, Is.EqualTo(expected));
         }
     }
 }
