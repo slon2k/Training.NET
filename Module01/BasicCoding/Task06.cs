@@ -47,7 +47,8 @@ namespace BasicCoding
             }
 
             number = Math.Abs(number);
-            while (number > 0)
+
+            do
             {
                 int lastDigit = number % 10;
                 if (lastDigit == digit)
@@ -57,6 +58,7 @@ namespace BasicCoding
 
                 number /= 10;
             }
+            while (number > 0);
 
             return false;
         }

@@ -25,6 +25,8 @@ namespace BasicCoding.Tests
         [TestCase(new int[] { 7, 1, 2, 3, 4, 5, 6, 7, 68, -69, 70, 15, 17 }, 6, ExpectedResult = new int[] { 6, 68, -69 })]
         [TestCase(new int[] { 7, 1, 2, 3, 4, 5, 6, 7, 68, -88, 70, 15, 17 }, 9, ExpectedResult = new int[] { })]
         [TestCase(new int[] { 7, 1, 2, 3, 4, 5, 6, 7, 68, -88, 70, 15, 17 }, 0, ExpectedResult = new int[] { 70 })]
+        [TestCase(new int[] { 0 }, 0, ExpectedResult = new int[] { 0 })]
+        [TestCase(new int[] { -69 }, 9, ExpectedResult = new int[] { -69 })]
         public int[] CheckDigitFiltering(int[] sourceArray, int digit)
         {
             return Task06.FilterDigit(sourceArray, digit);
