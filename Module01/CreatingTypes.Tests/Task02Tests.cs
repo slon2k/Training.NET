@@ -85,7 +85,7 @@ namespace CreatingTypes.Tests
         [TestCaseSource("ComparingByMaxTestData")]
         public void CheckComparingByMaxElement(int[,] array, int row1, int row2, bool expected)
         {
-            Assert.That(CompareByMaxElement(array, row1, row2) == expected);
+            Assert.That(CompareByMaxElement(array, row1, row2), Is.EqualTo(expected));
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace CreatingTypes.Tests
         [TestCaseSource("ComparingByMinTestData")]
         public void CheckComparingByMinElement(int[,] array, int row1, int row2, bool expected)
         {
-            Assert.That(CompareByMinElement(array, row1, row2) == expected);
+            Assert.That(CompareByMinElement(array, row1, row2), Is.EqualTo(expected));
         }
 
         /// <summary>
