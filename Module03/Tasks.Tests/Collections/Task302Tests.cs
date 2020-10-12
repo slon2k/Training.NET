@@ -5,9 +5,6 @@
 namespace Tasks.Tests.Collections
 {
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using static Tasks.Collections.Task302;
 
     /// <summary>
