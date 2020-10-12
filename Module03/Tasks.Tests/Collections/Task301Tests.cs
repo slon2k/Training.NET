@@ -62,8 +62,11 @@ namespace Tasks.Tests.Collections
         /// <param name="element">Element to find.</param>
         /// <returns>Index of the element or -1.</returns>
         [TestCase(new int[] { 1, 1, 2, 3, 3, 3, 4, 4, 5 }, 4, ExpectedResult = 6)]
-        [TestCase(new int[] { 1, 1, 2, 3, 3, 3, 5, 5, 6 }, 4, ExpectedResult = -1)]
+        [TestCase(new int[] { 1, 2, 2, 3, 3, 3, 4, 4, 5 }, 1, ExpectedResult = 0)]
+        [TestCase(new int[] { 1, 2, 2, 3, 3, 3, 4, 4, 5 }, 5, ExpectedResult = 8)]
+        [TestCase(new int[] { 1, 1, 3, 3, 3, 3, 3, 3, 5 }, 3, ExpectedResult = 2)]
         [TestCase(new int[] { 1, 2, 3, 4, 5 }, 4, ExpectedResult = 3)]
+        [TestCase(new int[] { 1, 1, 2, 3, 3, 3, 5, 5, 6 }, 4, ExpectedResult = -1)]
         public int CheckBinarySearch(int[] array, int element)
         {
             var collection = new SortedCollection<int>();
@@ -77,7 +80,7 @@ namespace Tasks.Tests.Collections
         }
 
         /// <summary>
-        /// Checks using custom Comperer in SortedCollection.
+        /// Checks using custom Comparer in SortedCollection.
         /// </summary>
         /// <param name="array">Items to add.</param>
         /// <returns>Expected sorted array.</returns>

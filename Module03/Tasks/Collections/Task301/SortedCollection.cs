@@ -93,27 +93,24 @@ namespace Tasks.Collections.Task301
 
         private void SortItems() => Array.Sort<T>(this.items, this.Comparer);
 
+        private int Compare(T element, int index) => this.Comparer.Compare(element, this.items[index]);
+
         private int Search(T element, int left, int right)
         {
-            while (left <= right)
+            while (left < right)
             {
                 int middle = left + ((right - left) / 2);
-                if (this.Comparer.Compare(element, this.items[middle]) == 0)
-                {
-                    return middle;
-                }
-
-                if (this.Comparer.Compare(element, this.items[middle]) > 0)
+                if (this.Compare(element, middle) > 0)
                 {
                     left = middle + 1;
                 }
                 else
                 {
-                    right = middle - 1;
+                    right = middle;
                 }
             }
 
-            return -1;
+            return this.Compare(element, right) == 0 ? right : -1;
         }
     }
 }
