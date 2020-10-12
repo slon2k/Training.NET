@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Delegates\" />
-    <Folder Include="Collections\" />
     <Folder Include="Linq\" />
     <Folder Include="Internal\" />
     <Folder Include="Streams\" />
