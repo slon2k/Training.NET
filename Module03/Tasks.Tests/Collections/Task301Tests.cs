@@ -4,11 +4,8 @@
 
 namespace Tasks.Tests.Collections
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Text;
     using NUnit.Framework;
     using Tasks.Collections.Task301;
 
@@ -19,7 +16,7 @@ namespace Tasks.Tests.Collections
     public class Task301Tests
     {
         /// <summary>
-        /// Check addition to collection.
+        /// Check item adding to the collection.
         /// </summary>
         /// <param name="array">Numbers to add.</param>
         /// <returns>Items in the collection.</returns>
@@ -36,7 +33,7 @@ namespace Tasks.Tests.Collections
         }
 
         /// <summary>
-        /// Check removing item from collection.
+        /// Check item removing from the collection.
         /// </summary>
         /// <param name="array">Items in the collection.</param>
         /// <param name="element">Element to remove.</param>
@@ -77,6 +74,31 @@ namespace Tasks.Tests.Collections
             }
 
             return collection.BinarySearch(element);
+        }
+
+        /// <summary>
+        /// Checking iterator of the collection.
+        /// </summary>
+        /// <param name="array">Items to add.</param>
+        /// <returns>Items in the collection.</returns>
+        [TestCase(new int[] { 5, 4, 3, 2, 1 }, ExpectedResult = new int[] { 1, 2, 3, 4, 5 })]
+        public int[] CheckIterator(int[] array)
+        {
+            var collection = new SortedCollection<int>();
+
+            foreach (var item in array)
+            {
+                collection.Add(item);
+            }
+
+            var result = new List<int>();
+
+            foreach (var item in collection)
+            {
+                result.Add(item);
+            }
+
+            return result.ToArray();
         }
 
         /// <summary>

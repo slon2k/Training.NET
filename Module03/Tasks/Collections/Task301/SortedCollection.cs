@@ -5,6 +5,7 @@
 namespace Tasks.Collections.Task301
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -39,6 +40,27 @@ namespace Tasks.Collections.Task301
         public T this[int index]
         {
             get => this.items[index];
+        }
+
+        /// <summary>
+        /// Enumerator of the collection.
+        /// </summary>
+        /// <returns>Enumerator.</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (var i = 0; i < this.items.Length; i++)
+            {
+                yield return this.items[i];
+            }
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>Enumerator.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>

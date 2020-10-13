@@ -4,15 +4,13 @@
 
 namespace Tasks.Collections.Task301
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Sorted collection with binary search.
     /// </summary>
     /// <typeparam name="T">The type of elements.</typeparam>
-    public interface ISortedCollection<T>
+    public interface ISortedCollection<T> : IEnumerable<T>
     {
         /// <summary>
         /// Gets or sets the element at the specified index.

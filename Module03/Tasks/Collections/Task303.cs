@@ -21,8 +21,8 @@ namespace Tasks.Collections
             yield return 1;
 
             int prev2 = 1;
-            yield return 1;
             count++;
+            yield return 1;
 
             while (count < limit)
             {
