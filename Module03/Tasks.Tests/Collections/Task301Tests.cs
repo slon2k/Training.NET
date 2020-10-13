@@ -41,11 +41,7 @@ namespace Tasks.Tests.Collections
         [TestCase(new int[] { 1, 3, 5, 4, 2 }, 3, ExpectedResult = new int[] { 1, 2, 4, 5 })]
         public int[] CheckSortedCollectionRemove(int[] array, int element)
         {
-            var collection = new SortedCollection<int>();
-            foreach (var item in array)
-            {
-                collection.Add(item);
-            }
+            var collection = new SortedCollection<int>(array);
 
             collection.Remove(element);
 
@@ -66,12 +62,7 @@ namespace Tasks.Tests.Collections
         [TestCase(new int[] { 1, 1, 2, 3, 3, 3, 5, 5, 6 }, 4, ExpectedResult = -1)]
         public int CheckBinarySearch(int[] array, int element)
         {
-            var collection = new SortedCollection<int>();
-
-            foreach (var item in array)
-            {
-                collection.Add(item);
-            }
+            var collection = new SortedCollection<int>(array);
 
             return collection.BinarySearch(element);
         }
@@ -84,12 +75,7 @@ namespace Tasks.Tests.Collections
         [TestCase(new int[] { 5, 4, 3, 2, 1 }, ExpectedResult = new int[] { 1, 2, 3, 4, 5 })]
         public int[] CheckIterator(int[] array)
         {
-            var collection = new SortedCollection<int>();
-
-            foreach (var item in array)
-            {
-                collection.Add(item);
-            }
+            var collection = new SortedCollection<int>(array);
 
             var result = new List<int>();
 

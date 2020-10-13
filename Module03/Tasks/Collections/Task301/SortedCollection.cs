@@ -34,6 +34,39 @@ namespace Tasks.Collections.Task301
             this.Comparer = comparer;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SortedCollection{T}"/> class.
+        /// </summary>
+        /// <param name="array">Initial data.</param>
+        public SortedCollection(T[] array)
+        {
+            this.Comparer = Comparer<T>.Default;
+            this.items = new T[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                this.items[i] = array[i];
+            }
+
+            this.SortItems();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SortedCollection{T}"/> class.
+        /// </summary>
+        /// <param name="array">Initial data.</param>
+        /// <param name="comparer">Comparer for T.</param>
+        public SortedCollection(T[] array, IComparer<T> comparer)
+        {
+            this.Comparer = comparer;
+            this.items = new T[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                this.items[i] = array[i];
+            }
+
+            this.SortItems();
+        }
+
         private IComparer<T> Comparer { get; set; }
 
         /// <inheritdoc/>
