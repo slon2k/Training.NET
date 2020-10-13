@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// <copyright file="Task303.cs" company="Boris Korobeinikov">
+// Copyright (c) Boris Korobeinikov. All rights reserved.
+// </copyright>
 
 namespace Tasks.Collections
 {
+    using System.Collections.Generic;
+
     /// <summary>
-    /// Implement a method for the counting of the Fibonacci's numbers of the Fibonacci using the iterator block yield.
+    /// Implement a method for the counting of the Fibonacci's numbers using the iterator block yield.
     /// </summary>
     public static class Task303
     {
