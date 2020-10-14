@@ -74,10 +74,12 @@ namespace Tasks.Collections.Task304
         /// <param name="item">The element to add.</param>
         public void Enqueue(T item)
         {
-            if (this.end > this.items.Length - 1)
+            if (this.end >= this.items.Length - 1)
             {
                 this.AddCapacity(InitialCapacity);
             }
+
+            this.items[++this.end] = item;
         }
 
         /// <summary>
