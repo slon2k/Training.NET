@@ -4,9 +4,7 @@
 
 namespace Tasks.Tests.Collections
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using NUnit.Framework;
     using Tasks.Collections.Task304;
 
