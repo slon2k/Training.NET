@@ -1,78 +1,75 @@
-﻿// <copyright file="GenericQueue.cs" company="Boris Korobeinikov">
+﻿// <copyright file="GenericStack.cs" company="Boris Korobeinikov">
 // Copyright (c) Boris Korobeinikov. All rights reserved.
 // </copyright>
 
-namespace Tasks.Collections.Task304
+namespace Tasks.Collections.Task305
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     /// <summary>
-    /// Task 4.
-    /// Develop a generic class-collection Queue that implements the basic operations for working with the structure data queue.
+    /// Test 5.
+    /// Develop a generic class-collection Stack that implements the basic operations for working with the structure data stack.
     /// Implement the capability to iterate by collection by design pattern Iterator.
     /// </summary>
     /// <typeparam name="T">Specifies the type of elements in the queue.</typeparam>
-    public class GenericQueue<T> : IEnumerable<T>
+    public class GenericStack<T> : IEnumerable<T>
     {
         private const int InitialCapacity = 100;
         private T[] items;
-        private int start = 0;
         private int end = -1;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericQueue{T}"/> class.
+        /// Initializes a new instance of the <see cref="GenericStack{T}"/> class.
         /// </summary>
-        public GenericQueue()
+        public GenericStack()
         {
             this.items = new T[InitialCapacity];
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericQueue{T}"/> class.
+        /// Initializes a new instance of the <see cref="GenericStack{T}"/> class.
         /// </summary>
-        /// <param name="collection">The collection whose elements are copied to the new GenericQueue.</param>
-        public GenericQueue(IEnumerable<T> collection)
+        /// <param name="items">The array whose elements are copied to the new Stack.</param>
+        public GenericStack(T[] items)
         {
-            this.Initialize(collection.ToArray());
+            this.Initialize(items);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericQueue{T}"/> class.
+        /// Initializes a new instance of the <see cref="GenericStack{T}"/> class.
         /// </summary>
-        /// <param name="array">The array whose elements are copied to the new GenericQueue.</param>
-        public GenericQueue(T[] array)
+        /// <param name="items">The collection whose elements are copied to the new GenericStack.</param>
+        public GenericStack(IEnumerable<T> items)
         {
-            this.Initialize(array);
+            this.Initialize(items.ToArray());
         }
 
         /// <summary>
         /// Gets the number of elements.
         /// </summary>
-        public int Count => this.end - this.start + 1;
+        public int Count => this.end + 1;
 
         /// <summary>
-        /// Removes all elements.
+        /// Removes and returns the object at the top of the GenericStack.
         /// </summary>
-        public void Clear()
-        {
-            this.start = 0;
-            this.end = -1;
-        }
+        /// <returns>The object removed from the top.</returns>
+        public T Pop() => this.Count > 0 ? this.items[this.end--] : throw new InvalidOperationException();
 
         /// <summary>
-        /// Removes and returns the element at the beginning.
+        /// Returns the object at the top of the GenericStack without removing it.
         /// </summary>
-        /// <returns>The element that is removed from the beginning.</returns>
-        public T Dequeue() => this.Count > 0 ? this.items[this.start++] : throw new InvalidOperationException();
+        /// <returns>The object from the top.</returns>
+        public T Peek() => this.Count > 0 ? this.items[this.end] : throw new InvalidOperationException();
 
         /// <summary>
-        /// Adds an object to the end.
+        /// Inserts an object at the top of the GenericStack.
         /// </summary>
-        /// <param name="item">The element to add.</param>
-        public void Enqueue(T item)
+        /// <param name="item">An element to add.</param>
+        public void Push(T item)
         {
             if (this.end >= this.items.Length - 1)
             {
@@ -83,27 +80,26 @@ namespace Tasks.Collections.Task304
         }
 
         /// <summary>
-        /// Returns the element at the beginning without removing it.
+        ///  Removes all objects from the GenericStack.
         /// </summary>
-        /// <returns>The element at the beginning.</returns>
-        public T Peek() => this.Count > 0 ? this.items[this.start] : throw new InvalidOperationException();
+        public void Clear() => this.end = -1;
 
         /// <summary>
         /// Copies the elements to a new array.
         /// </summary>
-        /// <returns>A new array containing elements of the queue.</returns>
+        /// <returns>A new array containing elements of the GenericStack.</returns>
         public T[] ToArray()
         {
             T[] array = new T[this.Count];
-            Array.Copy(this.items[this.start..], array, this.Count);
+            Array.Copy(this.items, array, this.Count);
             return array;
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the queue.
+        /// Returns an enumerator that iterates through the GenericStack.
         /// </summary>
-        /// <returns>An enumerator for the queue.</returns>
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => new Enumerator(this);
+        /// <returns>An enumerator for the GenericStack.</returns>
+        public IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
@@ -115,9 +111,8 @@ namespace Tasks.Collections.Task304
         {
             int count = this.Count;
             T[] array = new T[count + size];
-            Array.Copy(this.items[this.start..], array, count);
+            Array.Copy(this.items, array, count);
             this.items = array;
-            this.start = 0;
             this.end = count - 1;
         }
 
@@ -134,22 +129,23 @@ namespace Tasks.Collections.Task304
             private readonly T[] items;
             private int currentIndex = -1;
 
-            public Enumerator(GenericQueue<T> queue)
+            public Enumerator(GenericStack<T> items)
             {
-                this.items = queue.ToArray();
+                this.items = items.ToArray();
             }
 
             public T Current => this.IndexIsInRange() ? this.items[this.currentIndex] : throw new InvalidOperationException("Index out of range");
 
             object IEnumerator.Current => this.IndexIsInRange() ? this.items[this.currentIndex] : throw new InvalidOperationException("Index out of range");
 
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+
             public bool MoveNext() => ++this.currentIndex < this.items.Length;
 
             public void Reset() => this.currentIndex = -1;
-
-            void IDisposable.Dispose()
-            {
-            }
 
             private bool IndexIsInRange() => this.currentIndex > -1 && this.currentIndex < this.items.Length;
         }
