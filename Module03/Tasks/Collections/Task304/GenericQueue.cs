@@ -36,16 +36,16 @@ namespace Tasks.Collections.Task304
         /// <param name="collection">The collection whose elements are copied to the new GenericQueue.</param>
         public GenericQueue(IEnumerable<T> collection)
         {
-            int length = collection.Count();
-            this.items = new T[length + InitialCapacity];
+            this.Initialize(collection.ToArray());
+        }
 
-            int i = -1;
-            foreach (var item in collection)
-            {
-                this.items[++i] = item;
-            }
-
-            this.end = length - 1;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericQueue{T}"/> class.
+        /// </summary>
+        /// <param name="array">The array whose elements are copied to the new GenericQueue.</param>
+        public GenericQueue(T[] array)
+        {
+            this.Initialize(array);
         }
 
         /// <summary>
@@ -86,13 +86,18 @@ namespace Tasks.Collections.Task304
         /// Returns the element at the beginning without removing it.
         /// </summary>
         /// <returns>The element at the beginning.</returns>
-        public T Peek() => throw new NotImplementedException();
+        public T Peek() => this.Count > 0 ? this.items[this.start] : throw new InvalidOperationException();
 
         /// <summary>
         /// Copies the elements to a new array.
         /// </summary>
         /// <returns>A new array containing elements of the queue.</returns>
-        public T[] ToArray() => throw new NotImplementedException();
+        public T[] ToArray()
+        {
+            T[] array = new T[this.Count];
+            Array.Copy(this.items[this.start..], array, this.Count);
+            return array;
+        }
 
         /// <summary>
         /// Returns an enumerator that iterates through the queue.
@@ -119,6 +124,14 @@ namespace Tasks.Collections.Task304
             this.end = count - 1;
         }
 
+        private void Initialize(T[] array)
+        {
+            int length = array.Length;
+            this.items = new T[length + InitialCapacity];
+            Array.Copy(array, this.items, length);
+            this.end = length - 1;
+        }
+
         private class Enumerator : IEnumerator<T>
         {
             private readonly T[] items;
@@ -139,7 +152,6 @@ namespace Tasks.Collections.Task304
 
             void IDisposable.Dispose()
             {
-                throw new NotImplementedException();
             }
 
             private bool IndexIsInRange() => this.currentIndex > -1 && this.currentIndex < this.items.Length;
