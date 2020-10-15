@@ -5,13 +5,14 @@
 namespace Tasks.Collections.Task306
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
     /// <summary>
     /// Singly Linked List.
     /// </summary>
     /// <typeparam name="T">Specifies the type of elements in the table.</typeparam>
-    public class SinglyLinkedList<T>
+    public class SinglyLinkedList<T> : IEnumerable<T>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SinglyLinkedList{T}"/> class.
@@ -116,6 +117,27 @@ namespace Tasks.Collections.Task306
             }
 
             return list.ToArray();
+        }
+
+        /// <summary>
+        /// An Enumerator to iterate through Singly Linked List.
+        /// </summary>
+        /// <returns>An Enumerator for Singly Linked List.</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            var node = this.Head;
+
+            while (node != null)
+            {
+                yield return node.Item;
+                node = node.Next;
+            }
+        }
+
+        /// <inheritdoc/>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

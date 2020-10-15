@@ -22,7 +22,7 @@ namespace Tasks.Tests.Collections
         /// <param name="array">Data to create a list.</param>
         /// <param name="element">Element to add.</param>
         /// <returns>Elements in the list.</returns>
-        [TestCase(new int[] { 1, 2, 3, 4 }, 5, ExpectedResult = new int[] { 5, 4, 3, 2, 1})]
+        [TestCase(new int[] { 1, 2, 3, 4 }, 5, ExpectedResult = new int[] { 5, 4, 3, 2, 1 })]
         public int[] CheckAddLinkedList(int[] array, int element)
         {
             var linkedList = new SinglyLinkedList<int>(array);
@@ -79,6 +79,23 @@ namespace Tasks.Tests.Collections
         {
             var linkedList = new SinglyLinkedList<int>(array);
             return linkedList.Contains(element);
+        }
+
+        /// <summary>
+        /// Checking enumerator.
+        /// </summary>
+        /// <param name="array">Array to create a set.</param>
+        [TestCase(new int[] { 1, 2, 3, 4, 5 })]
+        public void CheckLinkedListEnumerator(int[] array)
+        {
+            var linkedList = new SinglyLinkedList<int>(array);
+            var list = new List<int>();
+            foreach (var item in linkedList)
+            {
+                list.Add(item);
+            }
+
+            Assert.That(linkedList.ToArray(), Is.EqualTo(list.ToArray()));
         }
     }
 }

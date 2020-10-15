@@ -16,11 +16,15 @@ namespace Tasks.Collections.Task306
     /// <typeparam name="T">Specifies the type of elements in the set.</typeparam>
     public class GenericSet<T> : IEnumerable<T>
     {
+        private const int TableSize = 1000;
+        private SinglyLinkedList<T>[] buckets = new SinglyLinkedList<T>[TableSize];
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSet{T}"/> class.
         /// </summary>
         public GenericSet()
         {
+            this.Count = 0;
         }
 
         /// <summary>
@@ -50,7 +54,7 @@ namespace Tasks.Collections.Task306
         /// <summary>
         /// Gets the number of elements that are contained in a set.
         /// </summary>
-        public int Count { get; }
+        public int Count { get; private set; }
 
         /// <summary>
         /// Adds the specified element to a set.
@@ -59,33 +63,88 @@ namespace Tasks.Collections.Task306
         /// <returns>True if the element is added. False if the element already presents.</returns>
         public bool Add(T item)
         {
-            throw new NotImplementedException();
+            int position = this.Position(item);
+            if (this.buckets[position] == null)
+            {
+               this.buckets[position] = new SinglyLinkedList<T>();
+            }
+
+            var list = this.buckets[position];
+
+            if (list.Contains(item))
+            {
+                return false;
+            }
+
+            list.Add(item);
+            this.Count++;
+
+            return true;
         }
 
         /// <summary>
         /// Removes all elements.
         /// </summary>
-        public void Clear() => throw new NotImplementedException();
+        public void Clear()
+        {
+            this.Count = 0;
+            this.buckets = new SinglyLinkedList<T>[TableSize];
+        }
 
         /// <summary>
         /// Determines whether the Set contains the specified element.
         /// </summary>
         /// <param name="item">The element to locate.</param>
         /// <returns>True if the Set contains the specified element.</returns>
-        public bool Contains(T item) => throw new NotImplementedException();
+        public bool Contains(T item) => this.buckets[this.Position(item)] == null ? false : this.buckets[this.Position(item)].Contains(item);
 
         /// <summary>
         /// Removes the specified element.
         /// </summary>
         /// <param name="item">The element to remove.</param>
         /// <returns>True if the element is successfully found and removed; otherwise, false.</returns>
-        public bool Remove(T item) => throw new NotImplementedException();
+        public bool Remove(T item)
+        {
+            int position = this.Position(item);
+            if (this.buckets[position] == null)
+            {
+                return false;
+            }
+
+            var list = this.buckets[position];
+
+            if (list.Remove(item) == true)
+            {
+                this.Count--;
+                return true;
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Copies the elements to a new array.
         /// </summary>
         /// <returns>A new array containing elements of the set.</returns>
-        public T[] ToArray() => throw new NotImplementedException();
+        public T[] ToArray()
+        {
+            var list = new List<T>();
+            for (int i = 0; i < this.buckets.Length; i++)
+            {
+                if (this.buckets[i] == null)
+                {
+                    continue;
+                }
+
+                var array = this.buckets[i].ToArray();
+                for (int j = 0; j < array.Length; j++)
+                {
+                    list.Add(array[j]);
+                }
+            }
+
+            return list.ToArray();
+        }
 
         /// <summary>
         /// Returns an enumerator that iterates through the set.
@@ -93,7 +152,11 @@ namespace Tasks.Collections.Task306
         /// <returns>An enumerator for the queue.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var array = this.ToArray();
+            for (int i = 0; i < array.Length; i++)
+            {
+                yield return array[i];
+            }
         }
 
         /// <inheritdoc/>
@@ -101,5 +164,9 @@ namespace Tasks.Collections.Task306
         {
             throw new NotImplementedException();
         }
+
+        private int GetHash(T item) => item.GetHashCode();
+
+        private int Position(T item) => this.GetHash(item) % TableSize;
     }
 }
