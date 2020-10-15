@@ -18,6 +18,37 @@ namespace Tasks.Collections.Task306
     public class GenericSet<T> : IEnumerable<T>
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="GenericSet{T}"/> class.
+        /// </summary>
+        public GenericSet()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericSet{T}"/> class.
+        /// </summary>
+        /// <param name="array">The array whose elements are added to the new set.</param>
+        public GenericSet(T[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                this.Add(array[i]);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericSet{T}"/> class.
+        /// </summary>
+        /// <param name="collection">The collection whose elements are added to the new set.</param>
+        public GenericSet(ICollection<T> collection)
+        {
+            foreach (var item in collection)
+            {
+                this.Add(item);
+            }
+        }
+
+        /// <summary>
         /// Gets the number of elements that are contained in a set.
         /// </summary>
         public int Count { get; }
