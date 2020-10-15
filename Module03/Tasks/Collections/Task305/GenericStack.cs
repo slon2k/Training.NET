@@ -7,7 +7,6 @@ namespace Tasks.Collections.Task305
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
 
     /// <summary>
@@ -140,7 +139,6 @@ namespace Tasks.Collections.Task305
 
             public void Dispose()
             {
-                throw new NotImplementedException();
             }
 
             public bool MoveNext() => ++this.currentIndex < this.items.Length;
