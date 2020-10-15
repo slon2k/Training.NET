@@ -7,14 +7,13 @@ namespace Tasks.Collections.Task306
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Task 6.
     /// Develop a generic class-collection Set that implements the basic operations for working with the structure data set with the reference types elements.
     /// Implement the capability to iterate by collection by block iterator yield.
     /// </summary>
-    /// <typeparam name="T">Specifies the type of elements in the queue.</typeparam>
+    /// <typeparam name="T">Specifies the type of elements in the set.</typeparam>
     public class GenericSet<T> : IEnumerable<T>
     {
         /// <summary>
