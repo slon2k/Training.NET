@@ -81,7 +81,7 @@ namespace Tasks.Collections
                 /// <summary>
                 /// Preorder (Root, Left, Right).
                 /// </summary>
-                Direct = 0,
+                Preorder = 0,
 
                 /// <summary>
                 ///  Inorder (Left, Root, Right).
@@ -169,7 +169,13 @@ namespace Tasks.Collections
             /// <returns>Elements in specified order.</returns>
             public IEnumerable<T> Items(Traversal order)
             {
-                throw new NotImplementedException();
+                return order switch
+                {
+                    Traversal.Preorder => this.Preorder(this.Root),
+                    Traversal.Inorder => this.Inorder(this.Root),
+                    Traversal.Postorder => this.Postorder(this.Root),
+                    _ => throw new ArgumentException("Invalid Traversal"),
+                };
             }
 
             private bool Insert(Node node, T item)
@@ -208,6 +214,60 @@ namespace Tasks.Collections
 
                         node = node.Right;
                     }
+                }
+            }
+
+            private IEnumerable<T> Inorder(Node node)
+            {
+                if (node != null)
+                {
+                    foreach (var item in this.Inorder(node.Left))
+                    {
+                        yield return item;
+                    }
+
+                    yield return node.Item;
+
+                    foreach (var item in this.Inorder(node.Right))
+                    {
+                        yield return item;
+                    }
+                }
+            }
+
+            private IEnumerable<T> Preorder(Node node)
+            {
+                if (node != null)
+                {
+                    yield return node.Item;
+
+                    foreach (var item in this.Preorder(node.Left))
+                    {
+                        yield return item;
+                    }
+
+                    foreach (var item in this.Preorder(node.Right))
+                    {
+                        yield return item;
+                    }
+                }
+            }
+
+            private IEnumerable<T> Postorder(Node node)
+            {
+                if (node != null)
+                {
+                    foreach (var item in this.Postorder(node.Left))
+                    {
+                        yield return item;
+                    }
+
+                    foreach (var item in this.Postorder(node.Right))
+                    {
+                        yield return item;
+                    }
+
+                    yield return node.Item;
                 }
             }
 
