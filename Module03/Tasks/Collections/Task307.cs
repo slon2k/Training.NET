@@ -148,7 +148,9 @@ namespace Tasks.Collections
             /// <returns>True if the element is successfully found and removed; otherwise, false.</returns>
             public bool Remove(T item)
             {
-                throw new NotImplementedException();
+                int count = this.Count;
+                this.Root = this.NodeRemoveItem(this.Root, item);
+                return count < this.Count ? true : false;
             }
 
             /// <summary>
@@ -207,6 +209,75 @@ namespace Tasks.Collections
                         node = node.Right;
                     }
                 }
+            }
+
+            private Node NodeRemoveItem(Node node, T item)
+            {
+                if (node == null)
+                {
+                    return null;
+                }
+
+                if (item.Equals(node.Item))
+                {
+                    if (node.Left == null && node.Right == null)
+                    {
+                        this.Count--;
+                        return null;
+                    }
+
+                    if (node.Left == null)
+                    {
+                        this.Count--;
+                        node = node.Right;
+                        return node;
+                    }
+
+                    if (node.Right == null)
+                    {
+                        this.Count--;
+                        node = node.Left;
+                        return node;
+                    }
+
+                    T minItem = this.FindMinInNode(node.Right);
+                    var newNode = new Node(minItem);
+                    newNode.Left = node.Left;
+                    newNode.Right = this.NodeRemoveItem(node.Right, minItem);
+                    node = newNode;
+                    return node;
+                }
+
+                if (this.comparer.Compare(item, node.Item) < 0)
+                {
+                    node.Left = this.NodeRemoveItem(node.Left, item);
+                }
+                else
+                {
+                    node.Right = this.NodeRemoveItem(node.Right, item);
+                }
+
+                return node;
+            }
+
+            private T FindMinInNode(Node node)
+            {
+                while (node.Left != null)
+                {
+                    node = node.Left;
+                }
+
+                return node.Item;
+            }
+
+            private T FindMaxInNode(Node node)
+            {
+                while (node.Right != null)
+                {
+                    node = node.Right;
+                }
+
+                return node.Item;
             }
 
             private Node FindNodeOrDefault(T item)
