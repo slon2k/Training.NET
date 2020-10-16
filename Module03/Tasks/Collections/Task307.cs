@@ -95,9 +95,9 @@ namespace Tasks.Collections
             }
 
             /// <summary>
-            /// Gets or sets root node.
+            /// Gets root node.
             /// </summary>
-            public Node Root { get; set; }
+            public Node Root { get; private set; }
 
             /// <summary>
             /// Gets the number of elements that are contained in the tree.
@@ -116,9 +116,14 @@ namespace Tasks.Collections
                     throw new ArgumentNullException(nameof(item));
                 }
 
-                int count = this.Count;
-                this.Root = this.Insert(this.Root, item);
-                return this.Count > count ? true : false;
+                if (this.Root == null)
+                {
+                    this.Root = new Node(item);
+                    this.Count++;
+                    return true;
+                }
+
+                return this.Insert(this.Root, item);
             }
 
             /// <summary>
@@ -165,26 +170,42 @@ namespace Tasks.Collections
                 throw new NotImplementedException();
             }
 
-            private Node Insert(Node node, T item)
+            private bool Insert(Node node, T item)
             {
                 if (node == null)
                 {
-                    this.Count++;
-                    return new Node(item);
+                    throw new ArgumentNullException(nameof(node));
                 }
 
                 if (item.Equals(node.Item))
                 {
-                    return node;
+                    return false;
                 }
 
-                if (this.comparer.Compare(item, node.Item) < 0)
+                while (true)
                 {
-                    return this.Insert(node.Left, item);
-                }
-                else
-                {
-                    return this.Insert(node.Right, item);
+                    if (this.comparer.Compare(item, node.Item) < 0)
+                    {
+                        if (node.Left == null)
+                        {
+                            node.Left = new Node(item);
+                            this.Count++;
+                            return true;
+                        }
+
+                        node = node.Left;
+                    }
+                    else
+                    {
+                        if (node.Right == null)
+                        {
+                            node.Right = new Node(item);
+                            this.Count++;
+                            return true;
+                        }
+
+                        node = node.Right;
+                    }
                 }
             }
 
