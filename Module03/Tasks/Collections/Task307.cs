@@ -6,7 +6,6 @@ namespace Tasks.Collections
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Task 7.
@@ -23,9 +22,195 @@ namespace Tasks.Collections
         public class BinarySearchTree<T>
         {
             /// <summary>
+            /// Comparer for T.
+            /// </summary>
+            private readonly Comparer<T> comparer;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="BinarySearchTree{T}"/> class.
+            /// </summary>
+            /// <param name="comparer">Comparer for T.</param>
+            public BinarySearchTree(Comparer<T> comparer = null)
+            {
+                if (comparer == null)
+                {
+                    try
+                    {
+                        this.comparer = Comparer<T>.Default;
+                    }
+                    catch (Exception)
+                    {
+                        throw new ArgumentException(nameof(comparer), $"Default comparer for Type {typeof(T)} was not found");
+                    }
+                }
+
+                this.Count = 0;
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="BinarySearchTree{T}"/> class.
+            /// </summary>
+            /// <param name="array">The array whose elements are added to the new tree.</param>
+            /// <param name="comparer">Comparer for T.</param>
+            public BinarySearchTree(T[] array, Comparer<T> comparer = null)
+            {
+                if (comparer == null)
+                {
+                    try
+                    {
+                        this.comparer = Comparer<T>.Default;
+                    }
+                    catch (Exception)
+                    {
+                        throw new ArgumentException(nameof(comparer), $"Default comparer for Type {typeof(T)} was not found");
+                    }
+                }
+
+                this.Count = 0;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    this.Add(array[i]);
+                }
+            }
+
+            /// <summary>
+            /// Ways for traversing the tree.
+            /// </summary>
+            public enum Traversal
+            {
+                /// <summary>
+                /// Preorder (Root, Left, Right).
+                /// </summary>
+                Direct = 0,
+
+                /// <summary>
+                ///  Inorder (Left, Root, Right).
+                /// </summary>
+                Inorder = 1,
+
+                /// <summary>
+                /// Postorder (Left, Right, Root).
+                /// </summary>
+                Postorder = 3,
+            }
+
+            /// <summary>
             /// Gets or sets root node.
             /// </summary>
             public Node Root { get; set; }
+
+            /// <summary>
+            /// Gets the number of elements that are contained in the tree.
+            /// </summary>
+            public int Count { get; private set; }
+
+            /// <summary>
+            /// Adds an element to the tree.
+            /// </summary>
+            /// <param name="item">The element to add.</param>
+            /// <returns>True if the element was added. False if the element already exists.</returns>
+            public bool Add(T item)
+            {
+                if (item == null)
+                {
+                    throw new ArgumentNullException(nameof(item));
+                }
+
+                int count = this.Count;
+                this.Root = this.Insert(this.Root, item);
+                return this.Count > count ? true : false;
+            }
+
+            /// <summary>
+            /// Determines whether the tree contains the specified element.
+            /// </summary>
+            /// <param name="item">The element to find.</param>
+            /// <returns>True if the tree contains the specified element.</returns>
+            public bool Contains(T item)
+            {
+                if (item == null)
+                {
+                    throw new ArgumentNullException(nameof(item));
+                }
+
+                return this.FindNodeOrDefault(item) == null ? false : true;
+            }
+
+            /// <summary>
+            /// Removes the specified element.
+            /// </summary>
+            /// <param name="item">The element to remove.</param>
+            /// <returns>True if the element is successfully found and removed; otherwise, false.</returns>
+            public bool Remove(T item)
+            {
+                throw new NotImplementedException();
+            }
+
+            /// <summary>
+            /// Removes all elements.
+            /// </summary>
+            public void Clear()
+            {
+                this.Root = null;
+                this.Count = 0;
+            }
+
+            /// <summary>
+            /// Gets elements in the tree in specified order.
+            /// </summary>
+            /// <param name="order">Traversal order.</param>
+            /// <returns>Elements in specified order.</returns>
+            public IEnumerable<T> Items(Traversal order)
+            {
+                throw new NotImplementedException();
+            }
+
+            private Node Insert(Node node, T item)
+            {
+                if (node == null)
+                {
+                    this.Count++;
+                    return new Node(item);
+                }
+
+                if (item.Equals(node.Item))
+                {
+                    return node;
+                }
+
+                if (this.comparer.Compare(item, node.Item) < 0)
+                {
+                    return this.Insert(node.Left, item);
+                }
+                else
+                {
+                    return this.Insert(node.Right, item);
+                }
+            }
+
+            private Node FindNodeOrDefault(T item)
+            {
+                Node node = this.Root;
+
+                while (node != null)
+                {
+                    if (item.Equals(node.Item))
+                    {
+                        return node;
+                    }
+
+                    if (this.comparer.Compare(item, node.Item) < 0)
+                    {
+                        node = node.Left;
+                    }
+                    else
+                    {
+                        node = node.Right;
+                    }
+                }
+
+                return null;
+            }
 
             /// <summary>
             /// Tree node.
