@@ -150,7 +150,7 @@ namespace Tasks.Collections
             {
                 int count = this.Count;
                 this.Root = this.NodeRemoveItem(this.Root, item);
-                return count < this.Count ? true : false;
+                return count > this.Count ? true : false;
             }
 
             /// <summary>

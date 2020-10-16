@@ -51,41 +51,41 @@ namespace Tasks.Tests.Collections
         [Test]
         public void CheckRemoveBinarySearchTree()
         {
-            var tree = new BinarySearchTree<int>();
+            // Removing left leaf.
+            var tree = new BinarySearchTree<int>(new int[] { 5, 3, 7 });
 
-            tree.Add(5);
-            tree.Add(3);
-            tree.Add(7);
-
-            tree.Remove(3);
+            Assert.That(tree.Remove(3), Is.EqualTo(true));
+            Assert.That(tree.Remove(3), Is.EqualTo(false));
 
             Assert.That(tree.Root.Left, Is.Null);
             Assert.That(tree.Count, Is.EqualTo(2));
 
-            tree.Clear();
-            tree.Add(5);
-            tree.Add(3);
-            tree.Add(7);
+            // Removing right leaf.
+            tree = new BinarySearchTree<int>(new int[] { 5, 3, 7 });
             tree.Remove(7);
 
             Assert.That(tree.Root.Right, Is.Null);
             Assert.That(tree.Count, Is.EqualTo(2));
 
+            // Removing root with one child
             tree.Remove(5);
             Assert.That(tree.Root.Item, Is.EqualTo(3));
 
-            tree.Clear();
-            tree.Add(5);
-            tree.Add(3);
-            tree.Add(7);
-
+            // Removing root with two children.
+            tree = new BinarySearchTree<int>(new int[] { 5, 3, 7 });
             tree.Remove(5);
+
             Assert.That(tree.Root.Item, Is.EqualTo(7));
             Assert.That(tree.Root.Right, Is.Null);
             Assert.That(tree.Root.Left.Item, Is.EqualTo(3));
 
-
-
+            // Removing element with two children.
+            tree = new BinarySearchTree<int>(new int[] { 10, 5, 15, 13, 17, 11, 14, 16, 20 });
+            Assert.That(tree.Contains(15), Is.True);
+            tree.Remove(15);
+            Assert.That(tree.Root.Right.Item, Is.EqualTo(16));
+            Assert.That(tree.Count, Is.EqualTo(8));
+            Assert.That(tree.Contains(15), Is.False);
         }
     }
 }
