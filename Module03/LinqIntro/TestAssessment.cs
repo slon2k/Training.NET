@@ -48,10 +48,7 @@ namespace LinqIntro
         /// </summary>
         public int Assessment
         {
-            get
-            {
-                return this.assessment;
-            }
+            get => this.assessment;
 
             set
             {

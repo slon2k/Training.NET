@@ -21,7 +21,8 @@ namespace LinqIntro.Tests
         [SetUp]
         public void SetUpService()
         {
-            this.assessmentService = new TestAssessmentService();
+            var studentService = new StudentService();
+            this.assessmentService = new TestAssessmentService(studentService);
             var assessments = TestAssessmentDataGenerator.GetAssessments();
             foreach (var item in assessments)
             {

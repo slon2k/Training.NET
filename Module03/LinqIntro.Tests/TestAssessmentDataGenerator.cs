@@ -27,7 +27,7 @@ namespace LinqIntro.Tests
                 new TestAssessmentModel("Padma Patil", "Herbology", new DateTime(1995, 5, 26), 75),
                 new TestAssessmentModel("Padma Patil", "Potion making", new DateTime(1995, 5, 27), 70),
                 new TestAssessmentModel("Parvati Patil", "Transfiguration", new DateTime(1995, 5, 25), 75),
-                new TestAssessmentModel("Parvati  Patil", "Herbology", new DateTime(1995, 5, 26), 80),
+                new TestAssessmentModel("Parvati Patil", "Herbology", new DateTime(1995, 5, 26), 80),
                 new TestAssessmentModel("Parvati Patil", "Potion making", new DateTime(1995, 5, 27), 75),
                 new TestAssessmentModel("Neville Longbottom", "Transfiguration", new DateTime(1995, 5, 25), 60),
                 new TestAssessmentModel("Neville Longbottom", "Herbology", new DateTime(1995, 5, 26), 100),
