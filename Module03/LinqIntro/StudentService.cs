@@ -53,7 +53,7 @@ namespace LinqIntro
         /// </summary>
         /// <param name="name">Student full name.</param>
         /// <returns>Student.</returns>
-        public Student GetStudentByName(string name) => this.students.FirstOrDefault(s => s.LastName == name);
+        public Student GetStudentByName(string name) => this.students.FirstOrDefault(s => s.FullName == name);
 
         /// <summary>
         /// Adds a student to the list.

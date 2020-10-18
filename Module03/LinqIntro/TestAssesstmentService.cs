@@ -6,7 +6,6 @@ namespace LinqIntro
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Assesstment service.
@@ -32,6 +31,12 @@ namespace LinqIntro
         {
             this.studentService = studentService;
         }
+
+        /// <summary>
+        /// Gets list of students.
+        /// </summary>
+        /// <returns>List of all students.</returns>
+        public IEnumerable<TestAssesstment> GetAll() => this.assesstments;
 
         /// <summary>
         /// Adds new test assesstment to the list.
