@@ -1,15 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Linq\**" />
-    <EmbeddedResource Remove="Linq\**" />
-    <None Remove="Linq\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="stylecop.json" />
@@ -24,11 +18,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Internal\" />
-    <Folder Include="Streams\" />
   </ItemGroup>
 
 </Project>
