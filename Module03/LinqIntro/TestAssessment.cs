@@ -1,4 +1,4 @@
-﻿// <copyright file="TestAssesstment.cs" company="Boris Korobeinikov">
+﻿// <copyright file="TestAssessment.cs" company="Boris Korobeinikov">
 // Copyright (c) Boris Korobeinikov. All rights reserved.
 // </copyright>
 
@@ -11,23 +11,23 @@ namespace LinqIntro
     /// <summary>
     /// Tests results.
     /// </summary>
-    public class TestAssesstment
+    public class TestAssessment
     {
-        private int assesstment;
+        private int assessment;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestAssesstment"/> class.
+        /// Initializes a new instance of the <see cref="TestAssessment"/> class.
         /// </summary>
         /// <param name="student">Student.</param>
         /// <param name="subject">Subject.</param>
         /// <param name="testDate">Test date.</param>
-        /// <param name="assesstment">Assesstment.</param>
-        public TestAssesstment(Student student, string subject, DateTimeOffset testDate, int assesstment)
+        /// <param name="assessment">Assessment.</param>
+        public TestAssessment(Student student, string subject, DateTimeOffset testDate, int assessment)
         {
             this.Student = student ?? throw new ArgumentNullException(nameof(student));
             this.Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             this.TestDate = testDate;
-            this.Assesstment = assesstment;
+            this.Assesstment = assessment;
         }
 
         /// <summary>
@@ -48,21 +48,21 @@ namespace LinqIntro
         /// <summary>
         /// Gets or sets assesstment.
         /// </summary>
-        public int Assesstment
+        public int Assessment
         {
             get
             {
-                return this.assesstment;
+                return this.assessment;
             }
 
             set
             {
                 if (value < 0 || value > 100)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(this.Assesstment));
+                    throw new ArgumentOutOfRangeException(nameof(this.Assessment));
                 }
 
-                this.assesstment = value;
+                this.assessment = value;
             }
         }
     }
