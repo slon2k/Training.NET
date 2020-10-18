@@ -13,10 +13,22 @@ namespace LinqIntro
     /// </summary>
     public class TestAssesstment
     {
+        private int assesstment;
+
         /// <summary>
-        /// Gets or sets id.
+        /// Initializes a new instance of the <see cref="TestAssesstment"/> class.
         /// </summary>
-        public int Id { get; set; }
+        /// <param name="student">Student.</param>
+        /// <param name="subject">Subject.</param>
+        /// <param name="testDate">Test date.</param>
+        /// <param name="assesstment">Assesstment.</param>
+        public TestAssesstment(Student student, string subject, DateTimeOffset testDate, int assesstment)
+        {
+            this.Student = student ?? throw new ArgumentNullException(nameof(student));
+            this.Subject = subject ?? throw new ArgumentNullException(nameof(subject));
+            this.TestDate = testDate;
+            this.Assesstment = assesstment;
+        }
 
         /// <summary>
         /// Gets or sets student.
@@ -36,6 +48,22 @@ namespace LinqIntro
         /// <summary>
         /// Gets or sets assesstment.
         /// </summary>
-        public int Assesstment { get; set; }
+        public int Assesstment
+        {
+            get
+            {
+                return this.assesstment;
+            }
+
+            set
+            {
+                if (value < 0 || value > 100)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(this.Assesstment));
+                }
+
+                this.assesstment = value;
+            }
+        }
     }
 }

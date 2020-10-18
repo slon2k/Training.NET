@@ -22,6 +22,13 @@ namespace LinqIntro
         public StudentService(IEnumerable<Student> students) => this.AddRange(students);
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="StudentService"/> class.
+        /// </summary>
+        public StudentService()
+        {
+        }
+
+        /// <summary>
         /// Gets list of students.
         /// </summary>
         /// <returns>List of all students.</returns>
@@ -40,6 +47,13 @@ namespace LinqIntro
         /// <param name="student">Specified student.</param>
         /// <returns>True if the student exists in the list.</returns>
         public bool StudentExists(Student student) => this.students.Contains(student) ? true : false;
+
+        /// <summary>
+        /// Gets student by name.
+        /// </summary>
+        /// <param name="name">Student full name.</param>
+        /// <returns>Student.</returns>
+        public Student GetStudentByName(string name) => this.students.FirstOrDefault(s => s.LastName == name);
 
         /// <summary>
         /// Adds a student to the list.
