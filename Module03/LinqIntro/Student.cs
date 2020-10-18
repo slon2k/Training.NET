@@ -17,7 +17,7 @@ namespace LinqIntro
         /// <param name="name">Full name.</param>
         public Student(string name)
         {
-            var strings = name.Split();
+            var strings = name.Trim().Split();
             string lastName = strings[^1];
             string firstName = string.Join(" ", strings[0..^1]);
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))

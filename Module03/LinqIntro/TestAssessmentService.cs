@@ -50,12 +50,12 @@ namespace LinqIntro
 
             if (!string.IsNullOrWhiteSpace(requestParams.Name))
             {
-                query = query.Where(x => x.Student.FullName.Contains(requestParams.Name));
+                query = query.Where(x => x.Student.FullName.ToLowerInvariant().Contains(requestParams.Name.ToLowerInvariant()));
             }
 
             if (!string.IsNullOrWhiteSpace(requestParams.Subject))
             {
-                query = query.Where(x => x.Subject.Contains(requestParams.Subject));
+                query = query.Where(x => x.Subject.ToLowerInvariant().Contains(requestParams.Subject.ToLowerInvariant()));
             }
 
             if (requestParams.From != null && requestParams.Till != null)
@@ -73,16 +73,19 @@ namespace LinqIntro
                 query = query.Where(x => x.TestDate <= requestParams.Till);
             }
 
-            switch (requestParams.OrderBy.ToLowerInvariant())
+            if (!string.IsNullOrWhiteSpace(requestParams.OrderBy))
             {
-                case "name": query = query.OrderBy(x => x.Student.FullName);
-                    break;
-                case "date": query = query.OrderBy(x => x.TestDate);
-                    break;
-                case "subject": query = query.OrderBy(x => x.Subject);
-                    break;
-                case "assesstment": query = query.OrderBy(x => x.Assessment);
-                    break;
+                switch (requestParams.OrderBy.ToLowerInvariant())
+                {
+                    case "name": query = query.OrderBy(x => x.Student.FullName);
+                        break;
+                    case "date": query = query.OrderBy(x => x.TestDate);
+                        break;
+                    case "subject": query = query.OrderBy(x => x.Subject);
+                        break;
+                    case "assesstment": query = query.OrderBy(x => x.Assessment);
+                        break;
+                }
             }
 
             query = query.Skip((requestParams.Page - 1) * requestParams.PageSize);

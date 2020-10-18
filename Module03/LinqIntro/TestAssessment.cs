@@ -5,8 +5,6 @@
 namespace LinqIntro
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Tests results.
@@ -27,7 +25,7 @@ namespace LinqIntro
             this.Student = student ?? throw new ArgumentNullException(nameof(student));
             this.Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             this.TestDate = testDate;
-            this.Assesstment = assessment;
+            this.Assessment = assessment;
         }
 
         /// <summary>
