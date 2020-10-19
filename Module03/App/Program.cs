@@ -8,7 +8,6 @@ namespace App
     {
         static void Main(string[] args)
         {
-
             // Delegates. Lambdas and Events. Task 3. 
             // Countdown demo. 
             var timer = new Countdown();

@@ -7,7 +7,6 @@ namespace Tasks.Collections
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// Implement an algorithm that allows to determine the frequency of occurrences of words in the text.

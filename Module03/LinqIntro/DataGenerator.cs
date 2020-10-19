@@ -6,7 +6,6 @@ namespace LinqIntro
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Generating data.
