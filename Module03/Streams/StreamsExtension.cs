@@ -131,16 +131,46 @@ namespace Streams
 
         public static int ByLineCopy(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+            using var streamReader = new StreamReader(sourcePath);
+            using var streamWriter = new StreamWriter(destinationPath);
+            string line;
+            int count = 0;
+            while ((line = streamReader.ReadLine()) != null)
+            {
+                streamWriter.WriteLine(line);
+                count++;
+            }
+
+            return count;
         }
 
         #endregion
 
         #region TODO: Implement content comparison logic of two files 
 
-        public static bool IsContentEquals(string sourcePath, string destinationPath)
+        public static bool IsContentEqual(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            InputValidation(sourcePath);
+            InputValidation(destinationPath);
+
+            byte[] file1 = File.ReadAllBytes(sourcePath);
+            byte[] file2 = File.ReadAllBytes(sourcePath);
+
+            if (file1.Length != file2.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < file1.Length; i++)
+            {
+                if (file1[i] != file2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #endregion
@@ -150,6 +180,14 @@ namespace Streams
         #region Private members
 
         #region TODO: Implement validation logic
+
+        private static void InputValidation(string path)
+        {
+            if (!File.Exists(path))
+            {
+                throw new ArgumentException(nameof(path), "File does not exist.");
+            }
+        }
 
         private static void InputValidation(string sourcePath, string destinationPath)
         {

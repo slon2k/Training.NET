@@ -16,6 +16,8 @@ namespace Streams
             try
             {
                 Console.WriteLine($"ByteCopy() done. Total bytes: {ByByteCopy(source, destination)}");
+                Console.WriteLine($"Content is equal: {IsContentEqual(source, destination)}");
+                Console.WriteLine();
             }
             catch (Exception e)
             {
@@ -25,6 +27,8 @@ namespace Streams
             try
             {
                 Console.WriteLine($"InMemoryByteCopy() done. Total bytes: {InMemoryByByteCopy(source, destination)}");
+                Console.WriteLine($"Content is equal: {IsContentEqual(source, destination)}");
+                Console.WriteLine();
             }
             catch (Exception e)
             {
@@ -34,6 +38,8 @@ namespace Streams
             try
             {
                 Console.WriteLine($"ByBlockCopy() done. Total bytes: {ByBlockCopy(source, destination)}");
+                Console.WriteLine($"Content is equal: {IsContentEqual(source, destination)}");
+                Console.WriteLine();
             }
             catch (Exception e)
             {
@@ -43,6 +49,8 @@ namespace Streams
             try
             {
                 Console.WriteLine($"InMemoryByBlockCopy() done. Total bytes: {InMemoryByBlockCopy(source, destination)}");
+                Console.WriteLine($"Content is equal: {IsContentEqual(source, destination)}");
+                Console.WriteLine();
             }
             catch (Exception e)
             {
@@ -52,14 +60,24 @@ namespace Streams
             try
             {
                 Console.WriteLine($"BufferedCopy() done. Total bytes: {BufferedCopy(source, destination)}");
+                Console.WriteLine($"Content is equal: {IsContentEqual(source, destination)}");
+                Console.WriteLine();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error", e.Message);
             }
 
-
-            //Console.WriteLine(IsContentEquals(source, destination));
+            try
+            {
+                Console.WriteLine($"ByLineCopy() done. Total lines: {ByLineCopy(source, destination)}");
+                Console.WriteLine($"Content is equal: {IsContentEqual(source, destination)}");
+                Console.WriteLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error", e.Message);
+            }
 
             Console.ReadLine();
         }
