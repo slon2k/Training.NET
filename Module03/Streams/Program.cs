@@ -31,6 +31,15 @@ namespace Streams
                 Console.WriteLine("Error", e.Message);
             }
 
+            try
+            {
+                Console.WriteLine($"ByBlockCopy() done. Total bytes: {ByBlockCopy(source, destination)}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error", e.Message);
+            }
+
             //Console.WriteLine(IsContentEquals(source, destination));
 
             Console.ReadLine();

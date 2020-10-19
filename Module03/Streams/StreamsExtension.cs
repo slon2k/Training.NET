@@ -91,9 +91,16 @@ namespace Streams
 
         #region TODO: Implement by block copy logic using FileStream buffer.
 
-        public static int ByBlockCopy(string sourcePath, string destinationPath)
+        public static long ByBlockCopy(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+            using var fileReader = new FileStream(sourcePath, FileMode.Open);
+            using (var fileWriter = new FileStream(destinationPath, FileMode.OpenOrCreate))
+            {
+                fileReader.CopyTo(fileWriter, 20);
+                fileWriter.SetLength(fileReader.Length);
+                return fileWriter.Length;
+            }
         }
 
         #endregion
