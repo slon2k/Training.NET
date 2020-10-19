@@ -36,10 +36,7 @@ namespace Tasks.Delegates
         /// <param name="time">Execution time.</param>
         protected virtual void OnTimeElapsed(DateTime time)
         {
-            if (this.TimeElapsed != null)
-            {
-                this.TimeElapsed(this, new CountdownEventArgs() { Message = $"Executed at {time}" });
-            }
+            this.TimeElapsed?.Invoke(this, new CountdownEventArgs() { Message = $"Executed at {time}" });
         }
     }
 }

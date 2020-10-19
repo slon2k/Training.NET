@@ -6,9 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Internal\**" />
     <Compile Remove="Linq\**" />
+    <Compile Remove="Streams\**" />
+    <EmbeddedResource Remove="Internal\**" />
     <EmbeddedResource Remove="Linq\**" />
+    <EmbeddedResource Remove="Streams\**" />
+    <None Remove="Internal\**" />
     <None Remove="Linq\**" />
+    <None Remove="Streams\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,11 +30,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Internal\" />
-    <Folder Include="Streams\" />
   </ItemGroup>
 
 </Project>
