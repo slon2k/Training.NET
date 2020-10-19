@@ -23,15 +23,13 @@ namespace LinqIntro.Services
             string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
             try
             {
-                using (var writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate)))
+                using var writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate));
+                foreach (var item in testAssessments)
                 {
-                    foreach (var item in testAssessments)
-                    {
-                        writer.Write(item.Name);
-                        writer.Write(item.Subject);
-                        writer.Write(item.TestDate.ToString());
-                        writer.Write(item.Assessment);
-                    }
+                    writer.Write(item.Name);
+                    writer.Write(item.Subject);
+                    writer.Write(item.TestDate.ToString());
+                    writer.Write(item.Assessment);
                 }
             }
             catch (Exception)

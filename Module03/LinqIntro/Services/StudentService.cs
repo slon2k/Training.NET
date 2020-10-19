@@ -46,7 +46,7 @@ namespace LinqIntro
         /// </summary>
         /// <param name="student">Specified student.</param>
         /// <returns>True if the student exists in the list.</returns>
-        public bool StudentExists(Student student) => this.students.Contains(student) ? true : false;
+        public bool StudentExists(Student student) => this.students.Contains(student);
 
         /// <summary>
         /// Gets student by name.

@@ -44,7 +44,7 @@ namespace LinqIntro
         public DateTime TestDate { get; set; }
 
         /// <summary>
-        /// Gets or sets assesstment.
+        /// Gets or sets assessment.
         /// </summary>
         public int Assessment
         {
@@ -61,6 +61,10 @@ namespace LinqIntro
             }
         }
 
+        /// <summary>
+        /// Conversion to string.
+        /// </summary>
+        /// <returns>String with the test assessment data.</returns>
         public override string ToString()
         {
             return $"{this.Student.FullName} {this.Subject} {this.TestDate.ToShortDateString()} {this.Assessment}";
