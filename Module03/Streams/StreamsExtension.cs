@@ -95,31 +95,44 @@ namespace Streams
         {
             InputValidation(sourcePath, destinationPath);
             using var fileReader = new FileStream(sourcePath, FileMode.Open);
-            using (var fileWriter = new FileStream(destinationPath, FileMode.OpenOrCreate))
-            {
-                fileReader.CopyTo(fileWriter, 20);
-                fileWriter.SetLength(fileReader.Length);
-                return fileWriter.Length;
-            }
+            using var fileWriter = new FileStream(destinationPath, FileMode.OpenOrCreate);
+            fileReader.CopyTo(fileWriter, 20);
+            fileWriter.SetLength(fileReader.Length);
+            return fileWriter.Length;
         }
 
         #endregion
 
         #region TODO: Implement by block copy logic using MemoryStream.
 
-        public static int InMemoryByBlockCopy(string sourcePath, string destinationPath)
+        public static long InMemoryByBlockCopy(string sourcePath, string destinationPath)
         {
-            // TODO: Use InMemoryByByteCopy method's approach
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+
+            using (var fileReader = new FileStream(sourcePath, FileMode.Open))
+            {
+                using var memStream = new MemoryStream();
+                using var fileWriter = new FileStream(destinationPath, FileMode.OpenOrCreate);
+                fileReader.CopyTo(memStream, 20);
+                memStream.CopyTo(fileWriter, 20);
+
+                return fileWriter.Length;
+            }
         }
 
         #endregion
 
         #region TODO: Implement by block copy logic using class-decorator BufferedStream.
 
-        public static int BufferedCopy(string sourcePath, string destinationPath)
+        public static long BufferedCopy(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+            using var fileReader = new FileStream(sourcePath, FileMode.Open);
+            using var fileWriter = new FileStream(destinationPath, FileMode.OpenOrCreate);
+            using var bufferedWriter = new BufferedStream(fileWriter);
+
+            fileReader.CopyTo(bufferedWriter);
+            return bufferedWriter.Length;
         }
 
         #endregion

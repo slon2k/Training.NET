@@ -40,6 +40,24 @@ namespace Streams
                 Console.WriteLine("Error", e.Message);
             }
 
+            try
+            {
+                Console.WriteLine($"InMemoryByBlockCopy() done. Total bytes: {InMemoryByBlockCopy(source, destination)}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error", e.Message);
+            }
+
+            try
+            {
+                Console.WriteLine($"BufferedCopy() done. Total bytes: {BufferedCopy(source, destination)}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error", e.Message);
+            }
+
             //Console.WriteLine(IsContentEquals(source, destination));
 
             Console.ReadLine();
