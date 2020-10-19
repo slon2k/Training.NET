@@ -58,6 +58,7 @@ namespace Streams
                 Console.WriteLine("Error", e.Message);
             }
 
+
             //Console.WriteLine(IsContentEquals(source, destination));
 
             Console.ReadLine();
