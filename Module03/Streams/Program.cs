@@ -12,6 +12,7 @@ namespace Streams
             string destinationFile = "destination.dat";
             string source = Path.Combine(Directory.GetCurrentDirectory(), sourceFile);
             string destination = Path.Combine(Directory.GetCurrentDirectory(), destinationFile);
+            
             try
             {
                 Console.WriteLine($"ByteCopy() done. Total bytes: {ByByteCopy(source, destination)}");
@@ -21,9 +22,14 @@ namespace Streams
                 Console.WriteLine("Error", e.Message);
             }
 
-
-
-            //Console.WriteLine($"InMemoryByteCopy() done. Total bytes: {InMemoryByByteCopy(source, destination)}");
+            try
+            {
+                Console.WriteLine($"InMemoryByteCopy() done. Total bytes: {InMemoryByByteCopy(source, destination)}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error", e.Message);
+            }
 
             //Console.WriteLine(IsContentEquals(source, destination));
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace Streams
 {
@@ -38,19 +39,52 @@ namespace Streams
 
         public static int InMemoryByByteCopy(string sourcePath, string destinationPath)
         {
+            InputValidation(sourcePath, destinationPath);
+
             // TODO: step 1. Use StreamReader to read entire file in string
+            string fileString;
+            using (var streamReader = new StreamReader(sourcePath))
+            {
+                fileString = streamReader.ReadToEnd();
+            }
 
             // TODO: step 2. Create byte array on base string content - use  System.Text.Encoding class
+            Encoding encoding = Encoding.UTF8;
+            var byteArray = encoding.GetBytes(fileString);
+            char[] charArray;
 
             // TODO: step 3. Use MemoryStream instance to read from byte array (from step 2)
+            using (var memStream = new MemoryStream())
+            {
+                memStream.Write(byteArray, 0, byteArray.Length);
+                
+                memStream.Seek(0, SeekOrigin.Begin);
 
-            // TODO: step 4. Use MemoryStream instance (from step 3) to write it content in new byte array
+                // TODO: step 4. Use MemoryStream instance (from step 3) to write it content in new byte array
+                var newByteArray = new byte[memStream.Length];
+                var count = 0;
 
-            // TODO: step 5. Use Encoding class instance (from step 2) to create char array on byte array content
+                while (count < memStream.Length)
+                {
+                    newByteArray[count++] = Convert.ToByte(memStream.ReadByte());
+                }
+
+                // TODO: step 5. Use Encoding class instance (from step 2) to create char array on byte array content
+                charArray = new char[encoding.GetCharCount(newByteArray, 0, count)];
+            }
 
             // TODO: step 6. Use StreamWriter here to write char array content in new file
+            int charsCount = 0;
+            using(var streamWriter = new StreamWriter(destinationPath))
+            {
+                foreach (var c in charArray)
+                {
+                    streamWriter.Write(c);
+                    charsCount++;
+                }
+            }
 
-            throw new NotImplementedException();
+            return charsCount;
         }
 
         #endregion
