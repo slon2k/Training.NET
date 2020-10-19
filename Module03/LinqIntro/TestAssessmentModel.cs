@@ -28,5 +28,10 @@ namespace LinqIntro
         public DateTime TestDate { get; set; }
 
         public int Assessment { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name} {this.Subject} {this.TestDate.ToShortDateString()} {this.Assessment}";
+        }
     }
 }

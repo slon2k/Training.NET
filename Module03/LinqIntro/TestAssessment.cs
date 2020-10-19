@@ -20,7 +20,7 @@ namespace LinqIntro
         /// <param name="subject">Subject.</param>
         /// <param name="testDate">Test date.</param>
         /// <param name="assessment">Assessment.</param>
-        public TestAssessment(Student student, string subject, DateTimeOffset testDate, int assessment)
+        public TestAssessment(Student student, string subject, DateTime testDate, int assessment)
         {
             this.Student = student ?? throw new ArgumentNullException(nameof(student));
             this.Subject = subject ?? throw new ArgumentNullException(nameof(subject));
@@ -41,7 +41,7 @@ namespace LinqIntro
         /// <summary>
         /// Gets or sets date of a test.
         /// </summary>
-        public DateTimeOffset TestDate { get; set; }
+        public DateTime TestDate { get; set; }
 
         /// <summary>
         /// Gets or sets assesstment.
@@ -59,6 +59,11 @@ namespace LinqIntro
 
                 this.assessment = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Student.FullName} {this.Subject} {this.TestDate.ToShortDateString()} {this.Assessment}";
         }
     }
 }

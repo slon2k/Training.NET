@@ -101,7 +101,7 @@ namespace LinqIntro
         /// <param name="subject">Subject.</param>
         /// <param name="date">Date.</param>
         /// <param name="assessment">Assessment.</param>
-        public void AddAssessment(string name, string subject, DateTimeOffset date, int assessment)
+        public void AddAssessment(string name, string subject, DateTime date, int assessment)
         {
             var student = this.studentService.GetStudentByName(name) ?? new Student(name);
 

@@ -5,6 +5,7 @@
 namespace LinqIntro
 {
     using System;
+    using LinqIntro.Services;
 
     /// <summary>
     /// Task 1.
@@ -24,7 +25,52 @@ namespace LinqIntro
         /// <param name="args">Args.</param>
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var fileService = new FileService();
+
+            // var seededAssessments = DataGenerator.GetAssessments();
+            // fileService.ExportAssestmentsToBinaryFile(seededAssessments);
+            var assessments = fileService.ImportAssestmentsFromBinaryFile();
+
+            var testAssessmentsService = new TestAssessmentService();
+
+            foreach (var item in assessments)
+            {
+                testAssessmentsService.AddAssessment(item.Name, item.Subject, item.TestDate, item.Assessment);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Selecting subject transfiguration:");
+            var list = testAssessmentsService.GetAssessments(new RequestParams { Subject = "transfiguration" });
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Selecting student Patil:");
+            list = testAssessmentsService.GetAssessments(new RequestParams { Name = "patil" });
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("First 5 assessments:");
+            list = testAssessmentsService.GetAssessments(new RequestParams { PageSize = 5 });
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Order by subject:");
+            list = testAssessmentsService.GetAssessments(new RequestParams { OrderBy = "subject" });
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.ReadLine();
         }
     }
 }
