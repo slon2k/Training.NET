@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using static Streams.StreamsExtension;
 
 namespace Streams
 {
@@ -6,17 +8,26 @@ namespace Streams
     {
         static void Main(string[] args)
         {
-            
-            
-            //var source = ConfigurationManager.AppSettings["sourceFilePath"];
+            string sourceFile = "source.dat";
+            string destinationFile = "destination.dat";
+            string source = Path.Combine(Directory.GetCurrentDirectory(), sourceFile);
+            string destination = Path.Combine(Directory.GetCurrentDirectory(), destinationFile);
+            try
+            {
+                Console.WriteLine($"ByteCopy() done. Total bytes: {ByByteCopy(source, destination)}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error", e.Message);
+            }
 
-            //var destination = ConfigurationManager.AppSettings["destinationFiePath"];
 
-            //Console.WriteLine($"ByteCopy() done. Total bytes: {ByByteCopy(source, destination)}");
 
             //Console.WriteLine($"InMemoryByteCopy() done. Total bytes: {InMemoryByByteCopy(source, destination)}");
 
             //Console.WriteLine(IsContentEquals(source, destination));
+
+            Console.ReadLine();
         }
     }
 }

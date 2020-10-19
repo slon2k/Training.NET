@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Streams
 {
@@ -10,9 +11,25 @@ namespace Streams
 
         #region TODO: Implement by byte copy logic using class FileStream as a backing store stream .
 
-        public static int ByByteCopy(string sourcePath, string destinationPath)
+        public static long ByByteCopy(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+            using var fileReader = new FileStream(sourcePath, FileMode.Open);
+            using (var fileWriter = new FileStream(destinationPath, FileMode.OpenOrCreate))
+            {
+                long count = 0;
+                int currentByte;
+                
+                for (int i = 0; i < fileReader.Length; i++)
+                {
+                    currentByte = fileReader.ReadByte();
+                    fileWriter.WriteByte((byte)currentByte);
+                    count++;
+                }
+                
+                fileWriter.SetLength(fileReader.Length);
+                return count;
+            }
         }
 
         #endregion
@@ -92,7 +109,19 @@ namespace Streams
 
         private static void InputValidation(string sourcePath, string destinationPath)
         {
+            if (!File.Exists(sourcePath))
+            {
+                throw new ArgumentException(nameof(sourcePath), "File does not exist.");
+            }
 
+            try
+            {
+                var fi = new FileInfo(destinationPath);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException(nameof(destinationPath), "Invalid file name.");
+            }
         }
 
         #endregion
