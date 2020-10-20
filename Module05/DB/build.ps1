@@ -1,0 +1,1 @@
+docker build -t adventure-works:1.0.2 .
