@@ -18,7 +18,8 @@ SELECT
 		CustomerID,
 		COUNT(*) AS Amount, 
 		GROUPING(EmployeeID) AS [Grouping]
-		FROM Orders 
+		FROM [dbo].[Orders]
+		WHERE YEAR([OrderDate]) >= 1998
 		GROUP BY EmployeeID, CustomerID WITH CUBE 
 		) ord
 ORDER BY Seller, Customer, Amount DESC
